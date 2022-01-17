@@ -1,133 +1,31 @@
 import React from "react";
-import {
-  Container,
-  createStyles,
-  Grid,
-  InputBase,
-  makeStyles,
-  Paper,
-  Typography,
-  withStyles,
-} from "@material-ui/core";
-import { grey } from "@material-ui/core/colors";
+import { Container, Grid, Paper, Typography } from "@material-ui/core";
 
-import { Tweet } from "../components/Tweet";
-import { SideMenu } from "../components/SideMenu";
+import { AddTweetForm } from "../../components/AddTweetForm";
+import { Tweet } from "../../components/Tweet";
+import { SideMenu } from "../../components/SideMenu";
+import { RightSide } from "../../components/RightSide";
+import { useHomeStyles } from "./theme";
 
-export const useHomeStyles = makeStyles((theme) => ({
-  wrapper: {
-    height: "100vh",
-  },
-  logo: {
-    fontSize: 36,
-    marginBottom: "15px 0",
-  },
-  sideMenuList: {
-    listStyle: "none",
-  },
-  sideMenuListItem: {
-    display: "inline-flex",
-    alignItems: "center",
-    cursor: "pointer",
-    borderRadius: 30,
-    padding: "0 15px 0 10px",
-    height: 50,
-    marginBottom: 15,
-    transition: "all 0.15s ease-in-out",
-    "& svg": {
-      marginRight: 10,
-    },
-    "&:last-child": {
-      marginBottom: 25,
-    },
-    "&:hover": {
-      backgroundColor: "rgba(29, 161, 242, 0.1)",
-      "& h6": {
-        color: theme.palette.primary.main,
-      },
-      "& svg path": {
-        fill: theme.palette.primary.main,
-      },
-    },
-  },
-  sideMenuListItemLabel: {
-    fontWeight: 700,
-    fontSize: 20,
-    marginLeft: 5,
-  },
-  sideMenuListItemIcon: {
-    fontSize: 28,
-  },
-  sideMenuButton: {
-    maxWidth: 230,
-    padding: theme.spacing(3),
-  },
-  tweetsWrapper: {
-    borderRadius: 0,
-    borderBottom: "none",
-    borderTop: "none",
-    height: "100%",
-  },
-  tweetsHeader: {
-    borderRadius: 0,
-    borderLeft: "none",
-    borderTop: "none",
-    borderRight: "none",
-    padding: "10px 15px",
-    "& h6": {
-      fontWeight: 800,
-    },
-  },
-  tweetUserName: {
-    color: grey[500],
-  },
-  tweetButtonRow: {
-    display: "flex",
-    justifyContent: "space-between",
-    paddingRight: 20,
-    position: "relative",
-    left: -10,
-  },
-  tweetIcons: {
-    fontSize: 20,
-  },
-  tweet: {
-    paddingTop: 10,
-    cursor: "pointer",
-    "&:hover": {
-      backgroundColor: " rgb(245, 248, 250)",
-    },
-  },
-  tweetAvatar: {
-    width: theme.spacing(5),
-    height: theme.spacing(5),
-  },
-}));
-
-const SearchTextField = withStyles(() =>
-  createStyles({
-    input: {
-      borderRadius: 30,
-      backgroundColor: "#E6ECF0",
-      height: 45,
-      padding: "0 15px",
-    },
-  })
-)(InputBase);
-
-export const Home = () => {
+export const Home = (): React.ReactElement => {
   const classes = useHomeStyles();
 
   return (
     <Container className={classes.wrapper} maxWidth="lg">
       <Grid container spacing={3}>
-        <Grid item xs={3}>
+        <Grid sm={1} md={3} item>
           <SideMenu classes={classes} />
         </Grid>
-        <Grid item xs={6}>
+        <Grid sm={8} md={6} item>
           <Paper className={classes.tweetsWrapper} variant="outlined">
             <Paper className={classes.tweetsHeader} variant="outlined">
               <Typography variant="h6">Главная</Typography>
+            </Paper>
+            <Paper>
+              <div className={classes.addForm}>
+                <AddTweetForm />
+              </div>
+              <div className={classes.addFormBottomLine} />
             </Paper>
             <Tweet
               classes={classes}
@@ -223,8 +121,8 @@ export const Home = () => {
             />
           </Paper>
         </Grid>
-        <Grid item xs={3}>
-          <SearchTextField placeholder="Поиск в Твиттере" fullWidth />
+        <Grid sm={3} md={3} item>
+          <RightSide />
         </Grid>
       </Grid>
     </Container>
