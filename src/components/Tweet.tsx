@@ -10,7 +10,6 @@ import { useHomeStyles } from "../pages/Home/theme";
 
 interface TweetProps {
   text: string;
-  classes: ReturnType<typeof useHomeStyles>;
   user: {
     fullname: string;
     username: string;
@@ -21,8 +20,9 @@ interface TweetProps {
 export const Tweet: React.FC<TweetProps> = ({
   text,
   user,
-  classes,
 }: TweetProps): React.ReactElement => {
+  const classes = useHomeStyles();
+
   return (
     <Paper
       className={classNames(classes.tweet, classes.tweetsHeader)}

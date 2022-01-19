@@ -1,10 +1,9 @@
 import { makeStyles, Theme } from "@material-ui/core";
 import grey from "@material-ui/core/colors/grey";
-// import { inherits } from "util";
 
 export const useHomeStyles = makeStyles((theme: Theme) => ({
   wrapper: {
-    height: "100%",
+    height: "100vh",
   },
   logo: {
     margin: "10px 0",
@@ -181,5 +180,9 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
   addFormBottomRight: {
     display: "flex",
     alignItems: "center",
+  },
+  tweetsLoader: {
+    textAlign: "center",
+    marginTop: 30,
   },
 }));

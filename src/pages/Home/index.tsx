@@ -1,14 +1,28 @@
 import React from "react";
 import { Container, Grid, Paper, Typography } from "@material-ui/core";
+import { useDispatch, useSelector } from "react-redux";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import { AddTweetForm } from "../../components/AddTweetForm";
 import { Tweet } from "../../components/Tweet";
 import { SideMenu } from "../../components/SideMenu";
 import { RightSide } from "../../components/RightSide";
 import { useHomeStyles } from "./theme";
+import { fetchTweets } from "../../store/ducks/tweets/actionCreators";
+import {
+  selectIsTweetsLoading,
+  selectTweetsItems,
+} from "../../store/ducks/tweets/selectors";
 
 export const Home = (): React.ReactElement => {
   const classes = useHomeStyles();
+  const dispatch = useDispatch();
+  const tweets = useSelector(selectTweetsItems);
+  const isLoading = useSelector(selectIsTweetsLoading);
+
+  React.useEffect(() => {
+    dispatch(fetchTweets());
+  }, [dispatch]);
 
   return (
     <Container className={classes.wrapper} maxWidth="lg">
@@ -27,98 +41,15 @@ export const Home = (): React.ReactElement => {
               </div>
               <div className={classes.addFormBottomLine} />
             </Paper>
-            <Tweet
-              classes={classes}
-              user={{
-                fullname: "mxhxvoid",
-                username: "mahavoid",
-                avatarUrl:
-                  "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80",
-              }}
-              text={`Слушаю краем уха экскурсовода в нижегородском кремле: "Против России
-								в 1941 году ополчился весь Евросоюз". Какой Евросоюз, деревянная
-								башка? Знайте, что пропаганда доберется до вас даже через "гидов".
-								Ищите нормальных неформальных экскурсоводов!`}
-            />
-            <Tweet
-              classes={classes}
-              user={{
-                fullname: "Анастасия Брюханова",
-                username: "bananstena",
-                avatarUrl:
-                  "https://images.unsplash.com/photo-1485043433441-db091a258e5a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8d29tYW58ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-              }}
-              text={`В субботу Алексей Венедиктов на радио опять доказывал, что электронное голосование честное, и внезапно стал угрожать подать на меня в суд, попутно называя кацеботом. `}
-            />
-            <Tweet
-              classes={classes}
-              user={{
-                fullname: "mxhxvoid",
-                username: "mahavoid",
-                avatarUrl:
-                  "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80",
-              }}
-              text={`Слушаю краем уха экскурсовода в нижегородском кремле: "Против России
-								в 1941 году ополчился весь Евросоюз". Какой Евросоюз, деревянная
-								башка? Знайте, что пропаганда доберется до вас даже через "гидов".
-								Ищите нормальных неформальных экскурсоводов!`}
-            />
-            <Tweet
-              classes={classes}
-              user={{
-                fullname: "Анастасия Брюханова",
-                username: "bananstena",
-                avatarUrl:
-                  "https://images.unsplash.com/photo-1485043433441-db091a258e5a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8d29tYW58ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-              }}
-              text={`В субботу Алексей Венедиктов на радио опять доказывал, что электронное голосование честное, и внезапно стал угрожать подать на меня в суд, попутно называя кацеботом. `}
-            />
-            <Tweet
-              classes={classes}
-              user={{
-                fullname: "mxhxvoid",
-                username: "mahavoid",
-                avatarUrl:
-                  "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80",
-              }}
-              text={`Слушаю краем уха экскурсовода в нижегородском кремле: "Против России
-								в 1941 году ополчился весь Евросоюз". Какой Евросоюз, деревянная
-								башка? Знайте, что пропаганда доберется до вас даже через "гидов".
-								Ищите нормальных неформальных экскурсоводов!`}
-            />
-            <Tweet
-              classes={classes}
-              user={{
-                fullname: "Анастасия Брюханова",
-                username: "bananstena",
-                avatarUrl:
-                  "https://images.unsplash.com/photo-1485043433441-db091a258e5a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8d29tYW58ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-              }}
-              text={`В субботу Алексей Венедиктов на радио опять доказывал, что электронное голосование честное, и внезапно стал угрожать подать на меня в суд, попутно называя кацеботом. `}
-            />
-            <Tweet
-              classes={classes}
-              user={{
-                fullname: "mxhxvoid",
-                username: "mahavoid",
-                avatarUrl:
-                  "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80",
-              }}
-              text={`Слушаю краем уха экскурсовода в нижегородском кремле: "Против России
-								в 1941 году ополчился весь Евросоюз". Какой Евросоюз, деревянная
-								башка? Знайте, что пропаганда доберется до вас даже через "гидов".
-								Ищите нормальных неформальных экскурсоводов!`}
-            />
-            <Tweet
-              classes={classes}
-              user={{
-                fullname: "Анастасия Брюханова",
-                username: "bananstena",
-                avatarUrl:
-                  "https://images.unsplash.com/photo-1485043433441-db091a258e5a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8d29tYW58ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-              }}
-              text={`В субботу Алексей Венедиктов на радио опять доказывал, что электронное голосование честное, и внезапно стал угрожать подать на меня в суд, попутно называя кацеботом. `}
-            />
+            {isLoading ? (
+              <div className={classes.tweetsLoader}>
+                <CircularProgress />
+              </div>
+            ) : (
+              tweets.map(({ _id, text, user }) => (
+                <Tweet key={_id} text={text} user={user} />
+              ))
+            )}
           </Paper>
         </Grid>
         <Grid sm={3} md={3} item>
