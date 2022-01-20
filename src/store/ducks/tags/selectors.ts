@@ -1,10 +1,10 @@
-import { createSelector } from "reselect";
 import { RootState } from "../../store";
 import { LoadingState, TagsState } from "./contracts/state";
 
 export const selectTags = (state: RootState): TagsState => state.tags;
 
-export const selectTagsItems = createSelector(selectTags, (tags) => tags.items);
+export const selectTagsItems = (state: RootState): TagsState["items"] =>
+  selectTags(state).items;
 
 export const selectIsTagsLoading = (state: RootState): boolean =>
   selectLoadingState(state) === LoadingState.LOADING;

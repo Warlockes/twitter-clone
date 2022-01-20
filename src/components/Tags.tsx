@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   List,
   ListItem,
@@ -33,7 +34,7 @@ export const Tags: React.FC = (): React.ReactElement => {
         <b>Актуальные темы</b>
       </Paper>
       {isLoadingTags ? (
-        <div className={classes.rideSideTagsLoader}>
+        <div className={classes.rightSideTagsLoader}>
           <CircularProgress />
         </div>
       ) : (
@@ -41,19 +42,22 @@ export const Tags: React.FC = (): React.ReactElement => {
           {items.map(({ label, count, _id }) => (
             <React.Fragment key={_id}>
               <ListItem className={classes.rightSideBlockItem}>
-                <ListItemText
-                  primary={label}
-                  secondary={
-                    <Typography
-                      component="span"
-                      variant="body2"
-                      color="textSecondary"
-                    >
-                      Твитов: {count}
-                    </Typography>
-                  }
-                />
+                <Link to={`/home/search?q=${label}`}>
+                  <ListItemText
+                    primary={label}
+                    secondary={
+                      <Typography
+                        component="span"
+                        variant="body2"
+                        color="textSecondary"
+                      >
+                        Твитов: {count}
+                      </Typography>
+                    }
+                  />
+                </Link>
               </ListItem>
+
               <Divider component="li" />
             </React.Fragment>
           ))}

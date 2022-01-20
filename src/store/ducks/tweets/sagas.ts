@@ -1,11 +1,8 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 
 import { TweetsApi } from "../../../services/api/tweetsApi";
-import {
-  setTweets,
-  setTweetsLoadingState,
-  TweetsActionType,
-} from "./actionCreators";
+import { setTweets, setTweetsLoadingState } from "./actionCreators";
+import { TweetsActionType } from "./contracts/actionTypes";
 import { LoadingState } from "./contracts/state";
 
 //TOFIX: 1) Разобраться с типом any в генераторе fetchTweetsRequest

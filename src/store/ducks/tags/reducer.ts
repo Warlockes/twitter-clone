@@ -1,5 +1,5 @@
 import produce, { Draft } from "immer";
-import { TagsActions, TagsActionType } from "./actionCreators";
+import { TagsActions, TagsActionType } from "./contracts/actionTypes";
 import { LoadingState, TagsState } from "./contracts/state";
 
 const initialTagState: TagsState = {

@@ -1,5 +1,5 @@
 import produce, { Draft } from "immer";
-import { TweetActions, TweetsActionType } from "./actionCreators";
+import { TweetsActions, TweetsActionType } from "./contracts/actionTypes";
 import { LoadingState, TweetsState } from "./contracts/state";
 
 const initialTweetState: TweetsState = {
@@ -8,7 +8,7 @@ const initialTweetState: TweetsState = {
 };
 
 export const tweetsReducer = produce(
-  (draft: Draft<TweetsState>, action: TweetActions) => {
+  (draft: Draft<TweetsState>, action: TweetsActions) => {
     switch (action.type) {
       case TweetsActionType.SET_TWEETS:
         draft.items = action.payload;

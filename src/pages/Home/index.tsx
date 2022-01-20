@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Grid, Paper, Typography } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
+import { Route } from "react-router-dom";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 import { AddTweetForm } from "../../components/AddTweetForm";
@@ -13,6 +14,8 @@ import {
   selectIsTweetsLoading,
   selectTweetsItems,
 } from "../../store/ducks/tweets/selectors";
+import { BackButton } from "../../components/BackButton";
+import { FullTweet } from "./components/FullTweet";
 
 export const Home = (): React.ReactElement => {
   const classes = useHomeStyles();
@@ -33,23 +36,38 @@ export const Home = (): React.ReactElement => {
         <Grid sm={8} md={6} item>
           <Paper className={classes.tweetsWrapper} variant="outlined">
             <Paper className={classes.tweetsHeader} variant="outlined">
-              <Typography variant="h6">Главная</Typography>
+              <Route path="/home/:any">
+                <BackButton />
+              </Route>
+
+              <Route path={["/home", "/home/search"]} exact>
+                <Typography variant="h6">Главная</Typography>
+              </Route>
+
+              <Route path="/home/tweet">
+                <Typography variant="h6">Твит</Typography>
+              </Route>
             </Paper>
-            <Paper>
-              <div className={classes.addForm}>
-                <AddTweetForm />
-              </div>
-              <div className={classes.addFormBottomLine} />
-            </Paper>
-            {isLoadingTweets ? (
-              <div className={classes.tweetsLoader}>
-                <CircularProgress />
-              </div>
-            ) : (
-              tweets.map(({ _id, text, user }) => (
-                <Tweet key={_id} text={text} user={user} />
-              ))
-            )}
+            <Route path={["/home", "/home/search"]} exact>
+              <Paper>
+                <div className={classes.addForm}>
+                  <AddTweetForm />
+                </div>
+                <div className={classes.addFormBottomLine} />
+              </Paper>
+            </Route>
+
+            <Route path="/home" exact>
+              {isLoadingTweets ? (
+                <div className={classes.tweetsLoader}>
+                  <CircularProgress />
+                </div>
+              ) : (
+                tweets.map((tweet) => <Tweet key={tweet._id} {...tweet} />)
+              )}
+            </Route>
+
+            <Route path="/home/tweet/:id" component={FullTweet} />
           </Paper>
         </Grid>
         <Grid sm={3} md={3} item>
