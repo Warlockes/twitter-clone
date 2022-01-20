@@ -140,6 +140,10 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
       backgroundColor: "#edf3f6",
     },
   },
+  rideSideTagsLoader: {
+    textAlign: "center",
+    padding: "15px 0",
+  },
   addForm: {
     padding: 20,
   },

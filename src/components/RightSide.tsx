@@ -1,8 +1,6 @@
 import React from "react";
 
 import { InputAdornment, Paper, Typography } from "@material-ui/core";
-import { useHomeStyles } from "../pages/Home/theme";
-
 import SearchIcon from "@material-ui/icons/SearchOutlined";
 import PersonAddIcon from "@material-ui/icons/PersonAddOutlined";
 import ListItem from "@material-ui/core/ListItem/ListItem";
@@ -12,7 +10,10 @@ import Avatar from "@material-ui/core/Avatar/Avatar";
 import ListItemText from "@material-ui/core/ListItemText/ListItemText";
 import List from "@material-ui/core/List/List";
 import Button from "@material-ui/core/Button/Button";
+
+import { useHomeStyles } from "../pages/Home/theme";
 import { SearchTextField } from "./SearchTextField";
+import { Tags } from "./Tags";
 
 export const RightSide = (): React.ReactElement => {
   const classes = useHomeStyles();
@@ -32,56 +33,7 @@ export const RightSide = (): React.ReactElement => {
         fullWidth
       />
       <Paper className={classes.rightSideBlock}>
-        <Paper className={classes.rightSideBlockHeader} variant="outlined">
-          <b>Актуальные темы</b>
-        </Paper>
-        <List>
-          <ListItem className={classes.rightSideBlockItem}>
-            <ListItemText
-              primary="Санкт-Петербург"
-              secondary={
-                <Typography
-                  component="span"
-                  variant="body2"
-                  color="textSecondary"
-                >
-                  Твитов: 3 331
-                </Typography>
-              }
-            />
-          </ListItem>
-          <Divider component="li" />
-          <ListItem className={classes.rightSideBlockItem}>
-            <ListItemText
-              primary="#коронавирус"
-              secondary={
-                <Typography
-                  component="span"
-                  variant="body2"
-                  color="textSecondary"
-                >
-                  Твитов: 163 122
-                </Typography>
-              }
-            />
-          </ListItem>
-          <Divider component="li" />
-          <ListItem className={classes.rightSideBlockItem}>
-            <ListItemText
-              primary="Беларусь"
-              secondary={
-                <Typography
-                  component="span"
-                  variant="body2"
-                  color="textSecondary"
-                >
-                  Твитов: 13 554
-                </Typography>
-              }
-            />
-          </ListItem>
-          <Divider component="li" />
-        </List>
+        <Tags />
       </Paper>
       <Paper className={classes.rightSideBlock}>
         <Paper className={classes.rightSideBlockHeader} variant="outlined">

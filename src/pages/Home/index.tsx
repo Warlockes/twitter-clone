@@ -18,7 +18,7 @@ export const Home = (): React.ReactElement => {
   const classes = useHomeStyles();
   const dispatch = useDispatch();
   const tweets = useSelector(selectTweetsItems);
-  const isLoading = useSelector(selectIsTweetsLoading);
+  const isLoadingTweets = useSelector(selectIsTweetsLoading);
 
   React.useEffect(() => {
     dispatch(fetchTweets());
@@ -41,7 +41,7 @@ export const Home = (): React.ReactElement => {
               </div>
               <div className={classes.addFormBottomLine} />
             </Paper>
-            {isLoading ? (
+            {isLoadingTweets ? (
               <div className={classes.tweetsLoader}>
                 <CircularProgress />
               </div>
