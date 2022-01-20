@@ -4,7 +4,10 @@ import { CircularProgress } from "@material-ui/core";
 import { useParams } from "react-router-dom";
 
 import { Tweet } from "../../../components/Tweet";
-import { fetchTweetData } from "../../../store/ducks/tweet/actionCreators";
+import {
+  fetchTweetData,
+  setTweetData,
+} from "../../../store/ducks/tweet/actionCreators";
 import {
   selectIsTweetLoading,
   selectTweetData,
@@ -23,17 +26,22 @@ export const FullTweet: React.FC = (): React.ReactElement | null => {
     if (id) {
       dispatch(fetchTweetData(id));
     }
+    return () => {
+      dispatch(setTweetData(undefined));
+    };
   }, [dispatch, id]);
 
-  if (!tweetData) {
-    return null;
+  if (isLoadingData) {
+    return (
+      <div className={classes.tweetLoader}>
+        <CircularProgress />
+      </div>
+    );
   }
 
-  return isLoadingData ? (
-    <div className={classes.tweetLoader}>
-      <CircularProgress />
-    </div>
-  ) : (
-    <Tweet {...tweetData} />
-  );
+  if (tweetData) {
+    return <Tweet {...tweetData} />;
+  }
+
+  return null;
 };
