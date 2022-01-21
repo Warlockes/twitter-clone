@@ -60,6 +60,36 @@
         "avatarUrl": "https://source.unsplash.com/random/100x100?5"
       },
       "id": 435346
+    },
+    {
+      "_id": "d7qn6nfs2ks",
+      "text": "Твиттор, привет",
+      "user": {
+        "fullname": "Test User",
+        "username": "testUSer",
+        "avatarUrl": "https://source.unsplash.com/random/100x100?5"
+      },
+      "id": 435347
+    },
+    {
+      "_id": "8x4i61w7m4",
+      "text": "Новый твит, самый",
+      "user": {
+        "fullname": "Test User",
+        "username": "testUSer",
+        "avatarUrl": "https://source.unsplash.com/random/100x100?5"
+      },
+      "id": 435348
+    },
+    {
+      "_id": "9p0np1vhovc",
+      "text": "Самый новый твиттор из всех",
+      "user": {
+        "fullname": "Test User",
+        "username": "testUSer",
+        "avatarUrl": "https://source.unsplash.com/random/100x100?5"
+      },
+      "id": 435349
     }
   ],
   "currentUser": {

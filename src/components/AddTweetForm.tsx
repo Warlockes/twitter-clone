@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import classNames from "classnames";
 
 import Avatar from "@material-ui/core/Avatar";
@@ -12,6 +12,7 @@ import EmojiIcon from "@material-ui/icons/SentimentSatisfiedOutlined";
 
 import { useHomeStyles } from "../pages/Home/theme";
 import { fetchAddTweet } from "../store/ducks/tweets/actionCreators";
+import { selectAddFormState } from "../store/ducks/tweets/selectors";
 
 interface AddTweetFormProps {
   maxRows?: number;
@@ -19,14 +20,20 @@ interface AddTweetFormProps {
 
 const MAX_LENGTH = 280;
 
+//TODO:
+// 1) Сделать Snackbar для оповещения о состоянии твитта
+
 export const AddTweetForm: React.FC<AddTweetFormProps> = ({
   maxRows,
 }: AddTweetFormProps): React.ReactElement => {
   const dispatch = useDispatch();
   const classes = useHomeStyles();
+  const addFormState = useSelector(selectAddFormState);
   const [text, setText] = React.useState<string>("");
   const textLimitPercent = Math.round((text.length / 280) * 100);
   const textCount = MAX_LENGTH - text.length;
+
+  React.useEffect(() => {}, [addFormState]);
 
   const handleChangeTextArea = (
     e: React.FormEvent<HTMLTextAreaElement>
@@ -97,7 +104,7 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
           )}
           <Button
             onClick={handleClickAddTweet}
-            disabled={text.length >= MAX_LENGTH}
+            disabled={!text || text.length >= MAX_LENGTH}
             color="primary"
             variant="contained"
           >
