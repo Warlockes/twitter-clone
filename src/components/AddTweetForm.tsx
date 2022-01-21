@@ -1,5 +1,7 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import classNames from "classnames";
+
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -9,6 +11,7 @@ import ImageOutlinedIcon from "@material-ui/icons/ImageOutlined";
 import EmojiIcon from "@material-ui/icons/SentimentSatisfiedOutlined";
 
 import { useHomeStyles } from "../pages/Home/theme";
+import { fetchAddTweet } from "../store/ducks/tweets/actionCreators";
 
 interface AddTweetFormProps {
   maxRows?: number;
@@ -19,6 +22,7 @@ const MAX_LENGTH = 280;
 export const AddTweetForm: React.FC<AddTweetFormProps> = ({
   maxRows,
 }: AddTweetFormProps): React.ReactElement => {
+  const dispatch = useDispatch();
   const classes = useHomeStyles();
   const [text, setText] = React.useState<string>("");
   const textLimitPercent = Math.round((text.length / 280) * 100);
@@ -33,6 +37,7 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
   };
 
   const handleClickAddTweet = (): void => {
+    dispatch(fetchAddTweet(text));
     setText("");
   };
 

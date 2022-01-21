@@ -10,4 +10,8 @@ export const TweetsApi = {
     const { data } = await axios.get(`/tweets?_id=${tweetId}`);
     return data;
   },
+  async fetchAddTweet(payload: Tweet): Promise<Tweet> {
+    const { data } = await axios.post("/tweets", payload);
+    return data;
+  },
 };
