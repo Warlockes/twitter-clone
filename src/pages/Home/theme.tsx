@@ -101,6 +101,9 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
     height: theme.spacing(6.5),
     marginRight: 15,
   },
+  tweetText: {
+    wordBreak: "break-word",
+  },
   tweetFooter: {
     display: "flex",
     position: "relative",
@@ -110,10 +113,6 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
   },
   tweetUserName: {
     color: grey[500],
-  },
-  tweetLoader: {
-    textAlign: "center",
-    padding: "70px 0 0 0",
   },
   rightSide: {
     paddingTop: 20,
