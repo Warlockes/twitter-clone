@@ -31,7 +31,7 @@ export const Tags: React.FC = (): React.ReactElement => {
   return (
     <>
       <Paper className={classes.rightSideBlockHeader} variant="outlined">
-        <b>Актуальные темы</b>
+        <Typography component="b">Актуальные темы</Typography>
       </Paper>
       {isLoadingTags ? (
         <div className={classes.rightSideTagsLoader}>

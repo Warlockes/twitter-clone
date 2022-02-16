@@ -37,7 +37,7 @@ export const RightSide = (): React.ReactElement => {
       </Paper>
       <Paper className={classes.rightSideBlock}>
         <Paper className={classes.rightSideBlockHeader} variant="outlined">
-          <b>Кого читать</b>
+          <Typography component="b">Кого читать</Typography>
         </Paper>
         <List>
           <ListItem className={classes.rightSideBlockItem}>
