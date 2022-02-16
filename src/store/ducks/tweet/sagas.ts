@@ -13,8 +13,8 @@ export function* fetchTweetRequest({
   payload: tweetId,
 }: IFetchTweetDataAction): any {
   try {
-    const data: Tweet[] = yield call(TweetsApi.fetchTweet, tweetId);
-    yield put(setTweetData(data[0]));
+    const data: Tweet = yield call(TweetsApi.fetchTweet, tweetId);
+    yield put(setTweetData(data));
   } catch (error) {
     yield put(setTweetDataLoadingState(LoadingState.ERROR));
   }
