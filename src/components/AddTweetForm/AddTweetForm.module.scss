@@ -1,0 +1,56 @@
+.addFormBody {
+  display: flex;
+  width: 100%;
+}
+
+.tweetAvatar {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+}
+
+.addFormTextarea {
+  width: 100%;
+  border: 0;
+  font-size: 20px;
+  outline: none;
+  font-family: inherit;
+  resize: none;
+}
+
+.addFormBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tweetFooter {
+  display: flex;
+  position: relative;
+  left: -13px;
+  justify-content: space-between;
+  max-width: 450px;
+}
+
+.addFormBottomActions {
+  margin-top: 10px;
+  padding-left: 70px;
+}
+
+.addFormBottomRight {
+  display: flex;
+  align-items: center;
+}
+
+.addFormCircleProgress {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  margin: 0 10px;
+
+  & :global {
+    .MuiCircularProgress-root {
+      position: absolute;
+    }
+  }
+}

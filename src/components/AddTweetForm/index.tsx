@@ -13,10 +13,10 @@ import Alert from "@material-ui/lab/Alert";
 import { Collapse } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 
-import { useHomeStyles } from "../pages/Home/theme";
-import { fetchAddTweet } from "../store/ducks/tweets/actionCreators";
-import { selectAddFormState } from "../store/ducks/tweets/selectors";
-import { AddFormState } from "../store/ducks/tweets/contracts/state";
+import { fetchAddTweet } from "../../store/ducks/tweets/actionCreators";
+import { selectAddFormState } from "../../store/ducks/tweets/selectors";
+import { AddFormState } from "../../store/ducks/tweets/contracts/state";
+import styles from "./AddTweetForm.module.scss";
 
 interface AddTweetFormProps {
   maxRows?: number;
@@ -31,7 +31,6 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
   maxRows,
 }: AddTweetFormProps): React.ReactElement => {
   const dispatch = useDispatch();
-  const classes = useHomeStyles();
   const addFormState = useSelector(selectAddFormState);
   const [text, setText] = React.useState<string>("");
   const [visibleError, setVisibleError] = React.useState<boolean>(false);
@@ -59,25 +58,25 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
 
   return (
     <>
-      <div className={classes.addFormBody}>
+      <div className={styles["addFormBody"]}>
         <Avatar
-          className={classes.tweetAvatar}
+          className={styles["tweetAvatar"]}
           alt={`Аватарка пользователя UserAvatar`}
           src="https://pbs.twimg.com/profile_images/796061890451542016/J-O1AguD_bigger.jpg"
         />
         <TextareaAutosize
           onChange={handleChangeTextArea}
-          className={classes.addFormTextarea}
+          className={styles["addFormTextarea"]}
           placeholder="Что происходит?"
           value={text}
           maxRows={maxRows}
         />
       </div>
-      <div className={classes.addFormBottom}>
+      <div className={styles["addFormBottom"]}>
         <div
           className={classNames(
-            classes.tweetFooter,
-            classes.addFormBottomActions
+            styles["tweetFooter"],
+            styles["addFormBottomActions"]
           )}
         >
           <IconButton color="primary">
@@ -87,11 +86,11 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
             <EmojiIcon style={{ fontSize: 26 }} />
           </IconButton>
         </div>
-        <div className={classes.addFormBottomRight}>
+        <div className={styles["addFormBottomRight"]}>
           {text && (
             <>
               <span>{textCount}</span>
-              <div className={classes.addFormCircleProgress}>
+              <div className={styles["addFormCircleProgress"]}>
                 <CircularProgress
                   variant="determinate"
                   size={20}

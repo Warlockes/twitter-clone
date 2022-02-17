@@ -8,7 +8,6 @@ import { AddTweetForm } from "../../components/AddTweetForm";
 import { Tweet } from "../../components/Tweet";
 import { SideMenu } from "../../components/SideMenu";
 import { RightSide } from "../../components/RightSide";
-import { useHomeStyles } from "./theme";
 import { fetchTweets } from "../../store/ducks/tweets/actionCreators";
 import {
   selectIsTweetsLoading,
@@ -16,9 +15,9 @@ import {
 } from "../../store/ducks/tweets/selectors";
 import { BackButton } from "../../components/BackButton";
 import { FullTweet } from "./components/FullTweet";
+import styles from "./Home.module.scss";
 
 export const Home = (): React.ReactElement => {
-  const classes = useHomeStyles();
   const dispatch = useDispatch();
   const tweets = useSelector(selectTweetsItems);
   const isLoadingTweets = useSelector(selectIsTweetsLoading);
@@ -28,14 +27,14 @@ export const Home = (): React.ReactElement => {
   }, [dispatch]);
 
   return (
-    <Container className={classes.wrapper} maxWidth="lg">
+    <Container className={styles["wrapper"]} maxWidth="lg">
       <Grid container spacing={3}>
         <Grid sm={1} md={3} item>
-          <SideMenu classes={classes} />
+          <SideMenu />
         </Grid>
         <Grid sm={8} md={6} item>
-          <Paper className={classes.tweetsWrapper} variant="outlined">
-            <Paper className={classes.tweetsHeader} variant="outlined">
+          <Paper className={styles["tweetsWrapper"]} variant="outlined">
+            <Paper className={styles["tweetsHeader"]} variant="outlined">
               <Route path="/home/:any">
                 <BackButton />
               </Route>
@@ -50,16 +49,16 @@ export const Home = (): React.ReactElement => {
             </Paper>
             <Route path={["/home", "/home/search"]} exact>
               <Paper>
-                <div className={classes.addForm}>
+                <div className={styles["addForm"]}>
                   <AddTweetForm />
                 </div>
-                <div className={classes.addFormBottomLine} />
+                <div className={styles["addFormBottomLine"]} />
               </Paper>
             </Route>
 
             <Route path="/home" exact>
               {isLoadingTweets ? (
-                <div className={classes.tweetsLoader}>
+                <div className={styles["tweetsLoader"]}>
                   <CircularProgress />
                 </div>
               ) : (

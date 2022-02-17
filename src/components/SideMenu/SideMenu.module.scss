@@ -1,0 +1,60 @@
+.logo {
+  margin: 10px 0;
+}
+
+.logoIcon {
+  font-size: 36px !important;
+}
+
+.sideMenuList {
+  position: sticky;
+  top: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-width: 230px;
+}
+
+.sideMenuListItem {
+  cursor: pointer;
+
+  &:hover {
+    & div {
+      background-color: rgba(29, 161, 242, 0.1);
+
+      & h6 {
+        color: rgb(29, 161, 242);
+      }
+      & svg path {
+        fill: rgb(29, 161, 242);
+      }
+    }
+  }
+
+  & div {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    padding: 0 25px 0 20px;
+    border-radius: 30px;
+    height: 50px;
+    margin-bottom: 15px;
+    transition: background-color 0.1s ease-in-out;
+  }
+}
+
+.sideMenuListItemLabel {
+  font-weight: 700 !important;
+  font-size: 20px !important;
+  margin-left: 15px !important;
+}
+
+.sideMenuListItemIcon {
+  font-size: 32px !important;
+  margin-left: -5px !important;
+}
+
+.sideMenuTweetButton {
+  padding: 25px !important;
+  margin-top: 16px !important;
+}

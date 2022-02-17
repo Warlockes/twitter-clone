@@ -11,15 +11,13 @@ import ListItemText from "@material-ui/core/ListItemText/ListItemText";
 import List from "@material-ui/core/List/List";
 import Button from "@material-ui/core/Button/Button";
 
-import { useHomeStyles } from "../pages/Home/theme";
-import { SearchTextField } from "./SearchTextField";
-import { Tags } from "./Tags";
+import { SearchTextField } from "../SearchTextField";
+import { Tags } from "../Tags";
+import styles from "./RightSide.module.scss";
 
 export const RightSide = (): React.ReactElement => {
-  const classes = useHomeStyles();
-
   return (
-    <div className={classes.rightSide}>
+    <div className={styles["rightSide"]}>
       <SearchTextField
         variant="outlined"
         placeholder="Поиск в Твиттере"
@@ -32,15 +30,15 @@ export const RightSide = (): React.ReactElement => {
         }}
         fullWidth
       />
-      <Paper className={classes.rightSideBlock}>
+      <Paper className={styles["rightSideBlock"]}>
         <Tags />
       </Paper>
-      <Paper className={classes.rightSideBlock}>
-        <Paper className={classes.rightSideBlockHeader} variant="outlined">
+      <Paper className={styles["rightSideBlock"]}>
+        <Paper className={styles["rightSideBlockHeader"]} variant="outlined">
           <Typography component="b">Кого читать</Typography>
         </Paper>
         <List>
-          <ListItem className={classes.rightSideBlockItem}>
+          <ListItem className={styles["rightSideBlockItem"]}>
             <ListItemAvatar>
               <Avatar
                 alt="Remy Sharp"

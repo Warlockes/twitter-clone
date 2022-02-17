@@ -27,11 +27,10 @@ import {
   selectIsTweetLoading,
   selectTweetData,
 } from "../../../../store/ducks/tweet/selectors";
-import { useFullTweetStyles } from "./FullTweet";
+import styles from "./FullTweet.module.scss";
 
 export const FullTweet: React.FC = (): React.ReactElement | null => {
   const dispatch = useDispatch();
-  const classes = useFullTweetStyles();
   const tweetData = useSelector(selectTweetData);
   const isLoadingData = useSelector(selectIsTweetLoading);
   const params: { id?: string } = useParams();
@@ -48,7 +47,7 @@ export const FullTweet: React.FC = (): React.ReactElement | null => {
 
   if (isLoadingData) {
     return (
-      <div className={classes.tweetLoader}>
+      <div className={styles["tweetLoader"]}>
         <CircularProgress />
       </div>
     );
@@ -65,22 +64,22 @@ export const FullTweet: React.FC = (): React.ReactElement | null => {
           title={<b>{fullname}</b>}
           subheader={`@${username}`}
         />
-        <CardContent className={classes.textWrapper}>
-          <Typography className={classes.tweetText} variant="h5">
+        <CardContent className={styles["textWrapper"]}>
+          <Typography className={styles["tweetText"]} variant="h5">
             {text}
           </Typography>
           <Typography>
-            <span className={classes.tweetDate}>
+            <span className={styles["tweetDate"]}>
               {format(new Date(createdAt), "H:mm")} ·{" "}
             </span>
-            <span className={classes.tweetDate}>
+            <span className={styles["tweetDate"]}>
               {format(new Date(createdAt), "dd MMM yyyy г.", {
                 locale: ruLang,
               })}
             </span>
           </Typography>
         </CardContent>
-        <CardActions className={classes.actionButtonRow}>
+        <CardActions className={styles["actionButtonRow"]}>
           <IconButton aria-label="">
             <CommentIcon />
           </IconButton>

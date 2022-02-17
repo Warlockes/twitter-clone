@@ -11,15 +11,14 @@ import {
   Paper,
 } from "@material-ui/core";
 
-import { useHomeStyles } from "../pages/Home/theme";
-import { fetchTags } from "../store/ducks/tags/actionCreators";
+import { fetchTags } from "../../store/ducks/tags/actionCreators";
 import {
   selectTagsItems,
   selectIsTagsLoading,
-} from "../store/ducks/tags/selectors";
+} from "../../store/ducks/tags/selectors";
+import styles from "./Tags.module.scss";
 
 export const Tags: React.FC = (): React.ReactElement => {
-  const classes = useHomeStyles();
   const dispatch = useDispatch();
   const items = useSelector(selectTagsItems);
   const isLoadingTags = useSelector(selectIsTagsLoading);
@@ -30,18 +29,18 @@ export const Tags: React.FC = (): React.ReactElement => {
 
   return (
     <>
-      <Paper className={classes.rightSideBlockHeader} variant="outlined">
+      <Paper className={styles["rightSideBlockHeader"]} variant="outlined">
         <Typography component="b">Актуальные темы</Typography>
       </Paper>
       {isLoadingTags ? (
-        <div className={classes.rightSideTagsLoader}>
+        <div className={styles["rightSideTagsLoader"]}>
           <CircularProgress />
         </div>
       ) : (
         <List>
           {items.map(({ label, count, _id }) => (
             <React.Fragment key={_id}>
-              <ListItem className={classes.rightSideBlockItem}>
+              <ListItem className={styles["rightSideBlockItem"]}>
                 <Link to={`/home/search?q=${label}`}>
                   <ListItemText
                     primary={label}

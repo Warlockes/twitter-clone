@@ -16,8 +16,8 @@ import {
 } from "@material-ui/core";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 
-import { useHomeStyles } from "../pages/Home/theme";
-import { formatDate } from "../utils/formatDate";
+import { formatDate } from "../../utils/formatDate";
+import styles from "./Tweet.module.scss";
 
 interface TweetProps {
   _id: string;
@@ -36,8 +36,6 @@ export const Tweet: React.FC<TweetProps> = ({
   createdAt,
   user,
 }: TweetProps): React.ReactElement => {
-  const classes = useHomeStyles();
-
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -48,34 +46,34 @@ export const Tweet: React.FC<TweetProps> = ({
   };
 
   return (
-    <Link className={classes.tweetWrapper} to={`/home/tweet/${_id}`}>
+    <Link className={styles["tweetWrapper"]} to={`/home/tweet/${_id}`}>
       <Paper
-        className={classNames(classes.tweet, classes.tweetsHeader)}
+        className={classNames(styles["tweet"], styles["tweetsHeader"])}
         variant="outlined"
       >
         <Avatar
-          className={classes.tweetAvatar}
+          className={styles["tweetAvatar"]}
           alt={`Аватарка пользователя ${user.fullname}`}
           src={user.avatarUrl}
         />
         <Box component="div">
           <Typography>
             <strong>{user.fullname}</strong>&nbsp;
-            <span className={classes.tweetUserName}>@{user.username}</span>
+            <span className={styles["tweetUserName"]}>@{user.username}</span>
             &nbsp;
-            <span className={classes.tweetUserName}>·</span>&nbsp;
-            <span className={classes.tweetUserName}>
+            <span className={styles["tweetUserName"]}>·</span>&nbsp;
+            <span className={styles["tweetUserName"]}>
               {formatDate(new Date(createdAt))}
             </span>
           </Typography>
           <Typography
-            className={classes.tweetText}
+            className={styles["tweetText"]}
             variant="body1"
             gutterBottom
           >
             {text}
           </Typography>
-          <div className={classes.tweetFooter}>
+          <div className={styles["tweetFooter"]}>
             <div>
               <IconButton>
                 <CommentIcon style={{ fontSize: 20 }} />

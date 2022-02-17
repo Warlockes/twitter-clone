@@ -1,0 +1,24 @@
+.tweetLoader {
+  text-align: center;
+  padding: 70px 0 0 0;
+}
+
+.textWrapper {
+  padding-top: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.actionButtonRow {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  justify-content: space-around;
+}
+
+.tweetText {
+  word-break: break-word;
+  margin-bottom: 15px;
+}
+
+.tweetDate {
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 0.875rem;
+}
