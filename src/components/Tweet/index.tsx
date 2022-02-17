@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import CommentIcon from "@material-ui/icons/ChatBubbleOutlineOutlined";
 import RepostIcon from "@material-ui/icons/RepeatOutlined";
 import LikeIcon from "@material-ui/icons/FavoriteBorderOutlined";
@@ -36,17 +36,46 @@ export const Tweet: React.FC<TweetProps> = ({
   createdAt,
   user,
 }: TweetProps): React.ReactElement => {
+  const { push } = useHistory();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
+  const handleClickDeleteTweet = (): void => {
+    if (window.confirm("Действительно хотите удалить твит?")) {
+      alert("Твит снесен под корень!");
+    }
+    setAnchorEl(null);
+  };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
 
+  const handleClickTweet = (event: React.MouseEvent<HTMLElement>): void => {
+    const { target } = event;
+
+    if (target instanceof Element) {
+      if (
+        target.closest("#actions-button") ||
+        target.attributes.getNamedItem("aria-hidden") ||
+        target.attributes.getNamedItem("aria-disabled")
+      ) {
+        return;
+      }
+    }
+    push(`/home/tweet/${_id}`);
+  };
+
   return (
-    <Link className={styles["tweetWrapper"]} to={`/home/tweet/${_id}`}>
+    <Box
+      component="div"
+      className={styles["tweetWrapper"]}
+      onClick={handleClickTweet}
+    >
       <Paper
         className={classNames(styles["tweet"], styles["tweetsHeader"])}
         variant="outlined"
@@ -56,7 +85,7 @@ export const Tweet: React.FC<TweetProps> = ({
           alt={`Аватарка пользователя ${user.fullname}`}
           src={user.avatarUrl}
         />
-        <Box component="div">
+        <Box component="div" className={styles["tweeetBody"]}>
           <Typography>
             <strong>{user.fullname}</strong>&nbsp;
             <span className={styles["tweetUserName"]}>@{user.username}</span>
@@ -97,7 +126,11 @@ export const Tweet: React.FC<TweetProps> = ({
             </div>
           </div>
         </Box>
-        <div>
+        <Box
+          component="div"
+          id="actions-button"
+          className={styles["tweetMenu"]}
+        >
           <IconButton
             aria-label="more"
             id="menu-button"
@@ -118,10 +151,15 @@ export const Tweet: React.FC<TweetProps> = ({
             onClose={handleClose}
           >
             <MenuItem onClick={handleClose}>Редактировать</MenuItem>
-            <MenuItem onClick={handleClose}>Удалить твит</MenuItem>
+            <MenuItem
+              onClick={handleClickDeleteTweet}
+              className={styles["menu-delete-button"]}
+            >
+              Удалить твит
+            </MenuItem>
           </Menu>
-        </div>
+        </Box>
       </Paper>
-    </Link>
+    </Box>
   );
 };
