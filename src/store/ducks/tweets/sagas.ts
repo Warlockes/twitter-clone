@@ -11,7 +11,7 @@ import {
   IFetchAddTweetAction,
   TweetsActionType,
 } from "./contracts/actionTypes";
-import { AddFormState, LoadingState, Tweet } from "./contracts/state";
+import { AddFormState, LoadingState } from "./contracts/state";
 
 export function* fetchTweetsRequest(): any {
   try {
@@ -22,18 +22,11 @@ export function* fetchTweetsRequest(): any {
   }
 }
 
-export function* fetchAddTweetRequest({ payload }: IFetchAddTweetAction): any {
+export function* fetchAddTweetRequest({
+  payload: text,
+}: IFetchAddTweetAction): any {
   try {
-    const data: Tweet = {
-      _id: Math.random().toString(36).substring(2),
-      text: payload,
-      user: {
-        fullname: "Test User",
-        username: "testUSer",
-        avatarUrl: "https://source.unsplash.com/random/100x100?5",
-      },
-    };
-    const item = yield call(TweetsApi.fetchAddTweet, data);
+    const item = yield call(TweetsApi.fetchAddTweet, text);
     yield put(addTweet(item));
   } catch (error) {
     yield put(setAddFormState(AddFormState.ERROR));
