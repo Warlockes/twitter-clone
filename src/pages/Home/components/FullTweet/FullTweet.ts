@@ -15,5 +15,10 @@ export const useFullTweetStyles = makeStyles((theme: Theme) => ({
   },
   tweetText: {
     wordBreak: "break-word",
+    marginBottom: "15px",
+  },
+  tweetDate: {
+    color: "rgba(0, 0, 0, 0.54)",
+    fontSize: "0.875rem",
   },
 }));

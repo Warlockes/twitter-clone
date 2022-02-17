@@ -11,6 +11,8 @@ import {
   Typography,
 } from "@material-ui/core";
 import { useParams } from "react-router-dom";
+import format from "date-fns/format";
+import ruLang from "date-fns/locale/ru";
 
 import CommentIcon from "@material-ui/icons/ChatBubbleOutlineOutlined";
 import RepostIcon from "@material-ui/icons/RepeatOutlined";
@@ -53,7 +55,7 @@ export const FullTweet: React.FC = (): React.ReactElement | null => {
   }
 
   if (tweetData) {
-    const { text, user } = tweetData;
+    const { text, user, createdAt } = tweetData;
     const { fullname, username, avatarUrl } = user;
 
     return (
@@ -66,6 +68,16 @@ export const FullTweet: React.FC = (): React.ReactElement | null => {
         <CardContent className={classes.textWrapper}>
           <Typography className={classes.tweetText} variant="h5">
             {text}
+          </Typography>
+          <Typography>
+            <span className={classes.tweetDate}>
+              {format(new Date(createdAt), "H:mm")} ·{" "}
+            </span>
+            <span className={classes.tweetDate}>
+              {format(new Date(createdAt), "dd MMM yyyy г.", {
+                locale: ruLang,
+              })}
+            </span>
           </Typography>
         </CardContent>
         <CardActions className={classes.actionButtonRow}>
