@@ -9,11 +9,9 @@ import FormControl from "@material-ui/core/FormControl";
 import TextField from "@material-ui/core/TextField";
 import { ModalBlock } from "../../components/ModalBlock";
 
-import { useStylesSignIn } from "./theme";
+import styles from "./SignIn.module.scss";
 
 export const SignIn: React.FC = (): React.ReactElement => {
-  const classes = useStylesSignIn();
-
   const [visibleSignIn, setVisibleSignIn] = useState<"signIn" | "signUp">();
 
   const handleClickOpenSignIn = (): void => {
@@ -29,37 +27,37 @@ export const SignIn: React.FC = (): React.ReactElement => {
   };
 
   return (
-    <div className={classes.wrapper}>
-      <section className={classes.blueSide}>
-        <TwitterIcon color="primary" className={classes.blueSideBigIcon} />
-        <ul className={classes.blueSideListInfo}>
-          <li className={classes.blueSideListInfoItem}>
+    <div className={styles["wrapper"]}>
+      <section className={styles["blueSide"]}>
+        <TwitterIcon color="primary" className={styles["blueSideBigIcon"]} />
+        <ul className={styles["blueSideListInfo"]}>
+          <li className={styles["blueSideListInfoItem"]}>
             <Typography variant="h6">
-              <SearchIcon className={classes.blueSideListInfoIcon} />
+              <SearchIcon className={styles["blueSideListInfoIcon"]} />
               Читайте о том, что вам интересно.
             </Typography>
           </li>
-          <li className={classes.blueSideListInfoItem}>
+          <li className={styles["blueSideListInfoItem"]}>
             <Typography variant="h6">
-              <PeopleIcon className={classes.blueSideListInfoIcon} />
+              <PeopleIcon className={styles["blueSideListInfoIcon"]} />
               Узнайте, о чем говорят в мире.
             </Typography>
           </li>
-          <li className={classes.blueSideListInfoItem}>
+          <li className={styles["blueSideListInfoItem"]}>
             <Typography variant="h6">
-              <MessageIcon className={classes.blueSideListInfoIcon} />
+              <MessageIcon className={styles["blueSideListInfoIcon"]} />
               Присоединяйтесь к общению.
             </Typography>
           </li>
         </ul>
       </section>
-      <section className={classes.loginSide}>
-        <div className={classes.loginSideWrapper}>
+      <section className={styles["loginSide"]}>
+        <div className={styles["loginSideWrapper"]}>
           <TwitterIcon
             color="primary"
-            className={classes.loginSideTwitterIcon}
+            className={styles["loginSideTwitterIcon"]}
           />
-          <Typography className={classes.loginSideTitle} variant="h4">
+          <Typography className={styles["loginSideTitle"]} variant="h4">
             Узнайте, что происходит в мире прямо сейчас
           </Typography>
           <Typography>
@@ -85,18 +83,17 @@ export const SignIn: React.FC = (): React.ReactElement => {
           </Button>
           <ModalBlock
             visible={visibleSignIn === "signIn"}
-            classes={classes}
             onClose={handleCloseModal}
             title="Войти в аккаунт"
           >
             <FormControl
-              className={classes.loginFormControl}
+              className={styles["loginFormControl"]}
               component="fieldset"
               fullWidth
             >
               <FormGroup aria-label="position" row>
                 <TextField
-                  className={classes.registerField}
+                  className={styles["registerField"]}
                   autoFocus
                   id="name"
                   label="Имя"
@@ -108,7 +105,7 @@ export const SignIn: React.FC = (): React.ReactElement => {
                   fullWidth
                 />
                 <TextField
-                  className={classes.registerField}
+                  className={styles["registerField"]}
                   autoFocus
                   id="email"
                   label="E-Mail"
@@ -120,7 +117,7 @@ export const SignIn: React.FC = (): React.ReactElement => {
                   fullWidth
                 />
                 <TextField
-                  className={classes.registerField}
+                  className={styles["registerField"]}
                   autoFocus
                   id="password"
                   label="Пароль"
@@ -139,18 +136,17 @@ export const SignIn: React.FC = (): React.ReactElement => {
           </ModalBlock>
           <ModalBlock
             visible={visibleSignIn === "signUp"}
-            classes={classes}
             onClose={handleCloseModal}
             title="Создайте учетную запись"
           >
             <FormControl
-              className={classes.loginFormControl}
+              className={styles["loginFormControl"]}
               component="fieldset"
               fullWidth
             >
               <FormGroup aria-label="position" row>
                 <TextField
-                  className={classes.registerField}
+                  className={styles["registerField"]}
                   autoFocus
                   id="name"
                   label="Имя"
@@ -162,7 +158,7 @@ export const SignIn: React.FC = (): React.ReactElement => {
                   fullWidth
                 />
                 <TextField
-                  className={classes.registerField}
+                  className={styles["registerField"]}
                   autoFocus
                   id="email"
                   label="E-Mail"
