@@ -1,10 +1,11 @@
 import produce, { Draft } from "immer";
+import { LoadingStatus } from "../../types";
 import { TagsActions, TagsActionType } from "./contracts/actionTypes";
-import { LoadingState, TagsState } from "./contracts/state";
+import { TagsState } from "./contracts/state";
 
 const initialTagState: TagsState = {
   items: [],
-  loadingState: LoadingState.NEVER,
+  loadingState: LoadingStatus.NEVER,
 };
 
 export const tagsReducer = produce(
@@ -12,12 +13,12 @@ export const tagsReducer = produce(
     switch (action.type) {
       case TagsActionType.SET_TAGS:
         draft.items = action.payload;
-        draft.loadingState = LoadingState.LOADED;
+        draft.loadingState = LoadingStatus.LOADED;
         break;
 
       case TagsActionType.FETCH_TAGS:
         draft.items = [];
-        draft.loadingState = LoadingState.LOADING;
+        draft.loadingState = LoadingStatus.LOADING;
         break;
 
       case TagsActionType.SET_LOADING_STATE:

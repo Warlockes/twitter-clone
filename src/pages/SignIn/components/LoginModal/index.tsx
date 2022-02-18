@@ -1,65 +1,132 @@
-import { FormControl, FormGroup, TextField, Button } from "@material-ui/core";
+import React from "react";
+import {
+  FormControl,
+  FormGroup,
+  TextField,
+  Button,
+  CircularProgress,
+} from "@material-ui/core";
 import { ModalBlock } from "../../../../components/ModalBlock";
-import styles from "./LoginModal.module.scss";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 
-interface LoginModalProps {
+import styles from "./LoginModal.module.scss";
+import { useNotification } from "../../../../hooks/useNotification";
+import { Notification } from "../../../../components/Notification";
+import { fetchSignIn } from "../../../../store/ducks/user/actionCreators";
+import { selectLoadingStatus } from "../../../../store/ducks/user/selectors";
+import { LoadingStatus } from "../../../../store/types";
+
+interface ILoginModalProps {
   open: boolean;
   handleClose: () => void;
 }
 
-export const LoginModal: React.FC<LoginModalProps> = ({
+export interface ILoginFormState {
+  email: string;
+  password: string;
+}
+
+const LoginFormSchema = yup
+  .object({
+    email: yup
+      .string()
+      .trim()
+      .email("Некорректная почта")
+      .required("Это обязательное поле!"),
+    password: yup
+      .string()
+      .min(6, "Минимальная длина пароля - 6 символов")
+      .required("Это обязательное поле!"),
+  })
+  .required();
+
+export const LoginModal: React.FC<ILoginModalProps> = ({
   open,
   handleClose,
 }): React.ReactElement => {
+  const dispatch = useDispatch();
+  const loadingStatus = useSelector(selectLoadingStatus);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ILoginFormState>({
+    resolver: yupResolver(LoginFormSchema),
+  });
+  const [text, handleOpenNotification, handleCloseNotification] =
+    useNotification();
+
+  const onSubmit = async (data: ILoginFormState): Promise<void> => {
+    dispatch(fetchSignIn(data));
+  };
+
+  React.useEffect(() => {
+    if (loadingStatus === LoadingStatus.ERROR) {
+      handleOpenNotification("Неверный логин или пароль");
+    } else if (loadingStatus === LoadingStatus.LOADED) {
+      handleClose();
+    }
+  }, [loadingStatus, handleClose, handleOpenNotification]);
+
   return (
-    <ModalBlock visible={open} onClose={handleClose} title="Войти в аккаунт">
-      <FormControl
-        className={styles["loginFormControl"]}
-        component="fieldset"
-        fullWidth
-      >
-        <FormGroup aria-label="position" row>
-          <TextField
-            className={styles["registerField"]}
-            autoFocus
-            id="name"
-            label="Имя"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="filled"
-            type="name"
-            fullWidth
-          />
-          <TextField
-            className={styles["registerField"]}
-            autoFocus
-            id="email"
-            label="E-Mail"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="filled"
-            type="email"
-            fullWidth
-          />
-          <TextField
-            className={styles["registerField"]}
-            autoFocus
-            id="password"
-            label="Пароль"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="filled"
-            type="password"
-            fullWidth
-          />
-          <Button variant="contained" color="primary" fullWidth>
-            Войти
-          </Button>
-        </FormGroup>
-      </FormControl>
-    </ModalBlock>
+    <>
+      <Notification
+        text={text}
+        handleClose={handleCloseNotification}
+      ></Notification>
+      <ModalBlock visible={open} onClose={handleClose} title="Войти в аккаунт">
+        <FormControl
+          className={styles["loginFormControl"]}
+          onSubmit={handleSubmit(onSubmit)}
+          component="form"
+          fullWidth
+        >
+          <FormGroup aria-label="position" row>
+            <TextField
+              className={styles["registerField"]}
+              {...register("email")}
+              label="E-mail"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="filled"
+              error={!!errors.email}
+              helperText={errors.email?.message}
+              fullWidth
+              autoFocus
+            />
+            <TextField
+              className={styles["registerField"]}
+              {...register("password")}
+              label="Пароль"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="filled"
+              type="password"
+              error={!!errors.password}
+              helperText={errors.password?.message}
+              fullWidth
+            />
+            <Button
+              variant="contained"
+              color="primary"
+              disabled={loadingStatus === LoadingStatus.LOADING}
+              type="submit"
+              fullWidth
+            >
+              {loadingStatus === LoadingStatus.LOADING ? (
+                <CircularProgress size={20} />
+              ) : (
+                <>Войти</>
+              )}
+            </Button>
+          </FormGroup>
+        </FormControl>
+      </ModalBlock>
+    </>
   );
 };

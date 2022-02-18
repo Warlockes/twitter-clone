@@ -9,6 +9,11 @@ import styles from "./SignIn.module.scss";
 import { LoginModal } from "./components/LoginModal";
 import { RegisterModal } from "./components/RegisterModal";
 
+enum SignInModalState {
+  Login = "signIn",
+  Register = "signUp",
+}
+
 export const SignIn: React.FC = (): React.ReactElement => {
   const [visibleModal, setVisibleModal] = useState<
     "signIn" | "signUp" | undefined
@@ -22,9 +27,9 @@ export const SignIn: React.FC = (): React.ReactElement => {
     setVisibleModal("signUp");
   };
 
-  const handleCloseModal = (): void => {
+  const handleCloseModal = React.useCallback((): void => {
     setVisibleModal(undefined);
-  };
+  }, [setVisibleModal]);
 
   return (
     <div className={styles["wrapper"]}>
@@ -82,11 +87,11 @@ export const SignIn: React.FC = (): React.ReactElement => {
             Войти
           </Button>
           <LoginModal
-            open={visibleModal === "signIn"}
+            open={visibleModal === SignInModalState.Login}
             handleClose={handleCloseModal}
           />
           <RegisterModal
-            open={visibleModal === "signUp"}
+            open={visibleModal === SignInModalState.Register}
             handleClose={handleCloseModal}
           />
         </div>

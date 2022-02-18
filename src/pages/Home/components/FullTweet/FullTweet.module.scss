@@ -4,7 +4,7 @@
 }
 
 .textWrapper {
-  padding-top: 0;
+  padding-top: 0 !important;
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 
@@ -15,7 +15,7 @@
 
 .tweetText {
   word-break: break-word;
-  margin-bottom: 15px;
+  margin-bottom: 15px !important;
 }
 
 .tweetDate {
