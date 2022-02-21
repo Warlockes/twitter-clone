@@ -73,10 +73,7 @@ export const LoginModal: React.FC<ILoginModalProps> = ({
 
   return (
     <>
-      <Notification
-        text={text}
-        handleClose={handleCloseNotification}
-      ></Notification>
+      <Notification text={text} handleClose={handleCloseNotification} />
       <ModalBlock visible={open} onClose={handleClose} title="Войти в аккаунт">
         <FormControl
           className={styles["loginFormControl"]}

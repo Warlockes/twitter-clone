@@ -4,7 +4,7 @@ import { Switch, Route, useHistory } from "react-router-dom";
 
 import { Home } from "./pages/Home";
 import { Layout } from "./pages/Layout";
-import { SignIn } from "./pages/SignIn";
+import { Authentication } from "./pages/Authentication";
 import { UserPage } from "./pages/User";
 import { AuthApi } from "./services/api/authApi";
 import { setUserData } from "./store/ducks/user/actionCreators";
@@ -41,7 +41,7 @@ function App() {
   return (
     <div className="twitter-clone">
       <Switch>
-        <Route path="/signin" component={SignIn} exact />
+        <Route path="/auth" component={Authentication} exact />
         <Layout>
           <Route path="/home" component={Home} />
           <Route path="/user" component={UserPage} />

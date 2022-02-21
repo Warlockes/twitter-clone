@@ -1,5 +1,6 @@
 import { axios } from "../../core/axios";
-import { ILoginFormState } from "../../pages/SignIn/components/LoginModal";
+import { ILoginFormState } from "../../pages/Authentication/components/LoginModal";
+import { IRegisterFormState } from "../../pages/Authentication/components/RegisterModal";
 
 interface IResponseAuthApi {
   status: string;
@@ -12,6 +13,14 @@ export const AuthApi = {
       username: payload.email,
       password: payload.password,
     });
+    return data.data;
+  },
+
+  async signUp(payload: IRegisterFormState): Promise<IResponseAuthApi> {
+    const { data } = await axios.post<IResponseAuthApi>(
+      "/auth/signup",
+      payload
+    );
     return data.data;
   },
 

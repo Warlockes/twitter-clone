@@ -4,6 +4,7 @@ import { LoadingStatus } from "../../types";
 import { setUserData, setUserDataLoadingStatus } from "./actionCreators";
 import {
   IFetchSignInAction,
+  IFetchSignUpAction,
   UserDataActionType,
 } from "./contracts/actionTypes";
 import { User } from "./contracts/state";
@@ -22,6 +23,16 @@ export function* fetchSignInRequest({ payload }: IFetchSignInAction): any {
   }
 }
 
+export function* fetchSignUpRequest({ payload }: IFetchSignUpAction): any {
+  try {
+    const data: User = yield call(AuthApi.signUp, payload);
+    yield put(setUserData(data));
+  } catch (error) {
+    yield put(setUserDataLoadingStatus(LoadingStatus.ERROR));
+  }
+}
+
 export function* userSaga() {
   yield takeLatest(UserDataActionType.FETCH_SIGN_IN, fetchSignInRequest);
+  yield takeLatest(UserDataActionType.FETCH_SIGN_UP, fetchSignUpRequest);
 }

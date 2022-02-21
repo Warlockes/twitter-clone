@@ -14,7 +14,7 @@ enum SignInModalState {
   Register = "signUp",
 }
 
-export const SignIn: React.FC = (): React.ReactElement => {
+export const Authentication: React.FC = (): React.ReactElement => {
   const [visibleModal, setVisibleModal] = useState<
     "signIn" | "signUp" | undefined
   >(undefined);

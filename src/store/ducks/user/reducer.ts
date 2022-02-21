@@ -20,6 +20,10 @@ export const userReducer = produce(
         draft.loadingStatus = LoadingStatus.LOADING;
         break;
 
+      case UserDataActionType.FETCH_SIGN_UP:
+        draft.loadingStatus = LoadingStatus.LOADING;
+        break;
+
       case UserDataActionType.SET_LOADING_STATUS:
         draft.loadingStatus = action.payload;
         break;
