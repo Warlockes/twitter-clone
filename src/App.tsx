@@ -12,6 +12,7 @@ import { fetchUserData } from "./store/ducks/user/actionCreators";
 function App() {
   // TODO:
   // 2) Чекать, если юзер не авторизован, то очищать токен и редакс
+  // 3) При удалении пользователя удалять все его твиты
 
   const dispatch = useDispatch();
   const history = useHistory();

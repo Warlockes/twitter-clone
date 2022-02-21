@@ -12,14 +12,14 @@ import {
 
 export function* fetchSignInRequest({ payload }: IFetchSignInAction): any {
   try {
-    throw new Error();
-    // const data: User = yield call(AuthApi.signIn, payload);
+    const data: User = yield call(AuthApi.signIn, payload);
 
-    // if (data.token) {
-    //   window.localStorage.setItem("twitter-clone_token", data.token);
-    // }
+    if (data.token) {
+      window.localStorage.setItem("twitter-clone_token", data.token);
+    }
 
-    // yield put(setUserData(data));
+    yield put(setUserData(data));
+    yield put(setAuthDataLoadingStatus(LoadingStatus.LOADED));
   } catch (error) {
     yield put(setAuthDataLoadingStatus(LoadingStatus.ERROR));
   }
@@ -27,9 +27,10 @@ export function* fetchSignInRequest({ payload }: IFetchSignInAction): any {
 
 export function* fetchSignUpRequest({ payload }: IFetchSignUpAction): any {
   try {
-    throw new Error();
+    yield call(AuthApi.signUp, payload);
     // const data: User = yield call(AuthApi.signUp, payload);
-    // yield put(setUserData(data));
+    // yield put(setUserData(data)); не устанавливать пользователя после регистрации - оставить на странице регистрации и уведомление - проверьте почту
+    yield put(setAuthDataLoadingStatus(LoadingStatus.LOADED));
   } catch (error) {
     yield put(setAuthDataLoadingStatus(LoadingStatus.ERROR));
   }
