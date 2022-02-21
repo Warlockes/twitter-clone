@@ -42,3 +42,15 @@
   text-align: center;
   padding: 15px 0;
 }
+
+.rightSideBlock {
+  background-color: #f5f8fa !important;
+  border-radius: 15px !important;
+  margin-top: 20px;
+
+  & :global {
+    .MuiList-root {
+      padding-top: 0;
+    }
+  }
+}

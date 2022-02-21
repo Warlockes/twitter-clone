@@ -24,7 +24,7 @@ export const Users = () => {
     dispatch(fetchUsers());
   }, [dispatch]);
   return (
-    <>
+    <Paper className={styles["rightSideBlock"]}>
       <Paper className={styles["rightSideBlockHeader"]} variant="outlined">
         <Typography component="b">Кого читать</Typography>
       </Paper>
@@ -56,6 +56,6 @@ export const Users = () => {
         ))}
         <Divider component="li" />
       </List>
-    </>
+    </Paper>
   );
 };

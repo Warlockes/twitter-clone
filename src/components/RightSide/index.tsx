@@ -1,5 +1,5 @@
 import React from "react";
-import { InputAdornment, Paper } from "@material-ui/core";
+import { Box, InputAdornment } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/SearchOutlined";
 
 import { SearchTextField } from "../SearchTextField";
@@ -9,7 +9,7 @@ import styles from "./RightSide.module.scss";
 
 export const RightSide = (): React.ReactElement => {
   return (
-    <div className={styles["rightSide"]}>
+    <Box className={styles["rightSide"]}>
       <SearchTextField
         variant="outlined"
         placeholder="Поиск в Твиттере"
@@ -22,12 +22,8 @@ export const RightSide = (): React.ReactElement => {
         }}
         fullWidth
       />
-      <Paper className={styles["rightSideBlock"]}>
-        <Tags />
-      </Paper>
-      <Paper className={styles["rightSideBlock"]}>
-        <Users />
-      </Paper>
-    </div>
+      <Tags />
+      <Users />
+    </Box>
   );
 };

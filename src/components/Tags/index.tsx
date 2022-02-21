@@ -28,7 +28,7 @@ export const Tags: React.FC = (): React.ReactElement => {
   }, [dispatch]);
 
   return (
-    <>
+    <Paper className={styles["rightSideBlock"]}>
       <Paper className={styles["rightSideBlockHeader"]} variant="outlined">
         <Typography component="b">Актуальные темы</Typography>
       </Paper>
@@ -62,6 +62,6 @@ export const Tags: React.FC = (): React.ReactElement => {
           ))}
         </List>
       )}
-    </>
+    </Paper>
   );
 };
