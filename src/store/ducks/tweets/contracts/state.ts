@@ -15,7 +15,6 @@ export interface Tweet {
   user: {
     fullname: string;
     username: string;
-    avatarUrl: string;
   };
 }
 

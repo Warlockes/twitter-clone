@@ -17,6 +17,7 @@ import { fetchAddTweet } from "../../store/ducks/tweets/actionCreators";
 import { selectAddFormState } from "../../store/ducks/tweets/selectors";
 import { AddFormState } from "../../store/ducks/tweets/contracts/state";
 import styles from "./AddTweetForm.module.scss";
+import { selectUserData } from "../../store/ducks/user/selectors";
 
 interface AddTweetFormProps {
   maxRows?: number;
@@ -31,6 +32,7 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
   maxRows,
 }: AddTweetFormProps): React.ReactElement => {
   const dispatch = useDispatch();
+  const user = useSelector(selectUserData);
   const addFormState = useSelector(selectAddFormState);
   const [text, setText] = React.useState<string>("");
   const [visibleError, setVisibleError] = React.useState<boolean>(false);
@@ -61,8 +63,8 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
       <div className={styles["addFormBody"]}>
         <Avatar
           className={styles["tweetAvatar"]}
-          alt={`Аватарка пользователя UserAvatar`}
-          src="https://pbs.twimg.com/profile_images/796061890451542016/J-O1AguD_bigger.jpg"
+          alt={user?.fullname}
+          src={"Ссылка на аватар"}
         />
         <TextareaAutosize
           onChange={handleChangeTextArea}

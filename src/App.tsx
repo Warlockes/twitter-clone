@@ -6,37 +6,26 @@ import { Home } from "./pages/Home";
 import { Layout } from "./pages/Layout";
 import { Authentication } from "./pages/Authentication";
 import { UserPage } from "./pages/User";
-import { AuthApi } from "./services/api/authApi";
-import { setUserData } from "./store/ducks/user/actionCreators";
 import { selectIsUserLoaded } from "./store/ducks/user/selectors";
+import { fetchUserData } from "./store/ducks/user/actionCreators";
 
 function App() {
   // TODO:
-  // 1) Поправить через саги или как-то еще - тут херня
   // 2) Чекать, если юзер не авторизован, то очищать токен и редакс
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const history = useHistory();
   const isAuth = useSelector(selectIsUserLoaded);
 
-  // React.useEffect(() => {
-  //   const checkAuth = async () => {
-  //     try {
-  //       const { data } = await AuthApi.getMe();
-  //       dispatch(setUserData(data));
-  //       history.replace("/home");
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   checkAuth();
-  // }, [history, dispatch]);
+  React.useEffect(() => {
+    dispatch(fetchUserData());
+  }, [dispatch]);
 
   React.useEffect(() => {
     if (isAuth) {
       history.replace("/home");
     }
-  }, [isAuth]);
+  }, [isAuth, history]);
 
   return (
     <div className="twitter-clone">

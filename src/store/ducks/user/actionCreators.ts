@@ -4,18 +4,12 @@ import { LoadingStatus } from "../../types";
 import {
   IFetchSignInAction,
   IFetchSignUpAction,
+  IFetchUserDataAction,
   ISetUserDataAction,
   ISetUserLoadingStatus,
   UserDataActionType,
 } from "./contracts/actionTypes";
 import { UserState } from "./contracts/state";
-
-export const setUserData = (
-  payload: UserState["data"]
-): ISetUserDataAction => ({
-  type: UserDataActionType.SET_USER_DATA,
-  payload,
-});
 
 export const fetchSignIn = (payload: ILoginFormState): IFetchSignInAction => ({
   type: UserDataActionType.FETCH_SIGN_IN,
@@ -27,6 +21,17 @@ export const fetchSignUp = (
 ): IFetchSignUpAction => ({
   type: UserDataActionType.FETCH_SIGN_UP,
   payload,
+});
+
+export const setUserData = (
+  payload: UserState["data"]
+): ISetUserDataAction => ({
+  type: UserDataActionType.SET_USER_DATA,
+  payload,
+});
+
+export const fetchUserData = (): IFetchUserDataAction => ({
+  type: UserDataActionType.FETCH_USER_DATA,
 });
 
 export const setUserDataLoadingStatus = (

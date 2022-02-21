@@ -55,12 +55,14 @@ export const FullTweet: React.FC = (): React.ReactElement | null => {
 
   if (tweetData) {
     const { text, user, createdAt } = tweetData;
-    const { fullname, username, avatarUrl } = user;
+    const { fullname, username } = user;
 
     return (
       <Card>
         <CardHeader
-          avatar={<Avatar aria-label="recipe" src={avatarUrl}></Avatar>}
+          avatar={
+            <Avatar aria-label="recipe" alt={fullname} src="Ссылка на аватар" />
+          }
           title={<b>{fullname}</b>}
           subheader={`@${username}`}
         />

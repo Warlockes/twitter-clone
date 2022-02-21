@@ -42,10 +42,7 @@ export const Users = () => {
           {users.map(({ _id, username, fullname }) => (
             <ListItem key={_id} className={styles["rightSideBlockItem"]}>
               <ListItemAvatar>
-                <Avatar
-                  alt={username}
-                  src="https://images.unsplash.com/photo-1561948955-570b270e7c36?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=601&q=80"
-                />
+                <Avatar alt={fullname} src="Ссылка на аватар" />
               </ListItemAvatar>
               <ListItemText
                 primary={fullname}

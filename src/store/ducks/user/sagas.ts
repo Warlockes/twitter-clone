@@ -32,7 +32,17 @@ export function* fetchSignUpRequest({ payload }: IFetchSignUpAction): any {
   }
 }
 
+export function* fetchUserDataRequest(): any {
+  try {
+    const data: User = yield call(AuthApi.getMe);
+    yield put(setUserData(data));
+  } catch (error) {
+    yield put(setUserDataLoadingStatus(LoadingStatus.ERROR));
+  }
+}
+
 export function* userSaga() {
   yield takeLatest(UserDataActionType.FETCH_SIGN_IN, fetchSignInRequest);
   yield takeLatest(UserDataActionType.FETCH_SIGN_UP, fetchSignUpRequest);
+  yield takeLatest(UserDataActionType.FETCH_USER_DATA, fetchUserDataRequest);
 }

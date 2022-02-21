@@ -11,16 +11,21 @@ const initialUserState: UserState = {
 export const userReducer = produce(
   (draft: Draft<UserState>, action: UserDataActions) => {
     switch (action.type) {
-      case UserDataActionType.SET_USER_DATA:
-        draft.data = action.payload;
-        draft.loadingStatus = LoadingStatus.LOADED;
-        break;
-
       case UserDataActionType.FETCH_SIGN_IN:
         draft.loadingStatus = LoadingStatus.LOADING;
         break;
 
       case UserDataActionType.FETCH_SIGN_UP:
+        draft.loadingStatus = LoadingStatus.LOADING;
+        break;
+
+      case UserDataActionType.SET_USER_DATA:
+        draft.data = action.payload;
+        draft.loadingStatus = LoadingStatus.LOADED;
+        break;
+
+      case UserDataActionType.FETCH_USER_DATA:
+        draft.data = undefined;
         draft.loadingStatus = LoadingStatus.LOADING;
         break;
 

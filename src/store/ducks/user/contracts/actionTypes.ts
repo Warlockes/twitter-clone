@@ -5,9 +5,10 @@ import { LoadingStatus } from "../../../types";
 import { User } from "./state";
 
 export enum UserDataActionType {
-  SET_USER_DATA = "user/SET_DATA",
   FETCH_SIGN_IN = "user/FETCH_SIGN_IN",
   FETCH_SIGN_UP = "user/FETCH_SIGN_UP",
+  SET_USER_DATA = "user/SET_DATA",
+  FETCH_USER_DATA = "user/FETCH_DATA",
   SET_LOADING_STATUS = "user/SET_LOADING_STATUS",
 }
 
@@ -26,6 +27,10 @@ export interface ISetUserDataAction extends Action<UserDataActionType> {
   payload: User | undefined;
 }
 
+export interface IFetchUserDataAction extends Action<UserDataActionType> {
+  type: UserDataActionType.FETCH_USER_DATA;
+}
+
 export interface ISetUserLoadingStatus extends Action<UserDataActionType> {
   type: UserDataActionType.SET_LOADING_STATUS;
   payload: LoadingStatus;
@@ -35,4 +40,5 @@ export type UserDataActions =
   | ISetUserDataAction
   | ISetUserLoadingStatus
   | IFetchSignInAction
-  | IFetchSignUpAction;
+  | IFetchSignUpAction
+  | IFetchUserDataAction;

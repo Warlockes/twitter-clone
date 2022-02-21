@@ -26,7 +26,6 @@ interface TweetProps {
   user: {
     fullname: string;
     username: string;
-    avatarUrl: string;
   };
 }
 
@@ -82,8 +81,8 @@ export const Tweet: React.FC<TweetProps> = ({
       >
         <Avatar
           className={styles["tweetAvatar"]}
-          alt={`Аватарка пользователя ${user.fullname}`}
-          src={user.avatarUrl}
+          alt={user.fullname}
+          src="Ссылка на аватар"
         />
         <Box component="div" className={styles["tweeetBody"]}>
           <Typography>
