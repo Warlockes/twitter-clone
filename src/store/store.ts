@@ -1,5 +1,6 @@
 import { applyMiddleware, compose, createStore } from "redux";
 import createSagaMiddleware from "redux-saga";
+import { AuthState } from "./ducks/auth/contracts/state";
 
 import { TagsState } from "./ducks/tags/contracts/state";
 import { TweetState } from "./ducks/tweet/contracts/state";
@@ -25,6 +26,7 @@ export interface RootState {
   tweet: TweetState;
   user: UserState;
   users: UsersState;
+  auth: AuthState;
 }
 
 export const store = createStore(

@@ -1,27 +1,11 @@
-import { ILoginFormState } from "../../../pages/Authentication/components/LoginModal";
-import { IRegisterFormState } from "../../../pages/Authentication/components/RegisterModal";
 import { LoadingStatus } from "../../types";
 import {
-  IFetchSignInAction,
-  IFetchSignUpAction,
   IFetchUserDataAction,
   ISetUserDataAction,
   ISetUserLoadingStatus,
   UserDataActionType,
 } from "./contracts/actionTypes";
 import { UserState } from "./contracts/state";
-
-export const fetchSignIn = (payload: ILoginFormState): IFetchSignInAction => ({
-  type: UserDataActionType.FETCH_SIGN_IN,
-  payload,
-});
-
-export const fetchSignUp = (
-  payload: IRegisterFormState
-): IFetchSignUpAction => ({
-  type: UserDataActionType.FETCH_SIGN_UP,
-  payload,
-});
 
 export const setUserData = (
   payload: UserState["data"]

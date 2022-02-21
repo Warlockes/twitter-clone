@@ -9,9 +9,9 @@ import { useNotification } from "../../../../hooks/useNotification";
 import { Notification } from "../../../../components/Notification";
 import styles from "./RegisterModal.module.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSignUp } from "../../../../store/ducks/user/actionCreators";
-import { selectLoadingStatus } from "../../../../store/ducks/user/selectors";
 import { LoadingStatus } from "../../../../store/types";
+import { fetchSignUp } from "../../../../store/ducks/auth/actionCreators";
+import { selectLoadingStatus } from "../../../../store/ducks/auth/selectors";
 
 interface IRegisterModalProps {
   open: boolean;

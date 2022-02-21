@@ -15,9 +15,9 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./LoginModal.module.scss";
 import { useNotification } from "../../../../hooks/useNotification";
 import { Notification } from "../../../../components/Notification";
-import { fetchSignIn } from "../../../../store/ducks/user/actionCreators";
-import { selectLoadingStatus } from "../../../../store/ducks/user/selectors";
 import { LoadingStatus } from "../../../../store/types";
+import { fetchSignIn } from "../../../../store/ducks/auth/actionCreators";
+import { selectLoadingStatus } from "../../../../store/ducks/auth/selectors";
 
 interface ILoginModalProps {
   open: boolean;

@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import { authReducer } from "./ducks/auth/reducer";
 import { tagsReducer } from "./ducks/tags/reducer";
 import { tweetReducer } from "./ducks/tweet/reducer";
 import { tweetsReducer } from "./ducks/tweets/reducer";
@@ -11,4 +12,5 @@ export const rootReducer = combineReducers({
   tags: tagsReducer,
   user: userReducer,
   users: usersReducer,
+  auth: authReducer,
 });
