@@ -10,7 +10,7 @@ export const selectUserData = (state: RootState): User | undefined =>
 export const selectIsUserLoading = (state: RootState): boolean =>
   selectLoadingStatus(state) === LoadingStatus.LOADING;
 
-export const selectIsUsersLoaded = (state: RootState): boolean =>
+export const selectIsUserLoaded = (state: RootState): boolean =>
   selectLoadingStatus(state) === LoadingStatus.LOADED;
 
 export const selectLoadingStatus = (state: RootState): LoadingStatus =>
