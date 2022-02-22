@@ -6,8 +6,14 @@ import { Home } from "./pages/Home";
 import { Layout } from "./pages/Layout";
 import { Authentication } from "./pages/Authentication";
 import { UserPage } from "./pages/User";
-import { selectIsUserLoaded } from "./store/ducks/user/selectors";
+import {
+  selectIsUserLoaded,
+  selectLoadingStatus,
+} from "./store/ducks/user/selectors";
 import { fetchUserData } from "./store/ducks/user/actionCreators";
+import { LoadingStatus } from "./store/types";
+import TwitterIcon from "@material-ui/icons/Twitter";
+import styles from "./App.module.scss";
 
 function App() {
   // TODO:
@@ -16,20 +22,34 @@ function App() {
 
   const dispatch = useDispatch();
   const history = useHistory();
-  const isAuth = useSelector(selectIsUserLoaded);
+  const isUserLoaded = useSelector(selectIsUserLoaded);
+  const loadingStatus = useSelector(selectLoadingStatus);
+  const isReady =
+    loadingStatus !== LoadingStatus.NEVER &&
+    loadingStatus !== LoadingStatus.LOADING;
 
   React.useEffect(() => {
     dispatch(fetchUserData());
   }, [dispatch]);
 
   React.useEffect(() => {
-    if (isAuth) {
+    if (isReady && !isUserLoaded) {
+      history.replace("/auth");
+    } else {
       history.replace("/home");
     }
-  }, [isAuth, history]);
+  }, [isUserLoaded, history, isReady]);
+
+  if (isReady) {
+    return (
+      <div className={styles["loader-container"]}>
+        <TwitterIcon color="primary" />
+      </div>
+    );
+  }
 
   return (
-    <div className="twitter-clone">
+    <div className={styles["twitter-clone"]}>
       <Switch>
         <Route path="/auth" component={Authentication} exact />
         <Layout>
