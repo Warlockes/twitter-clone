@@ -3,7 +3,10 @@ import { AuthApi } from "../../../services/api/authApi";
 import { LoadingStatus } from "../../types";
 import { setUserData } from "../user/actionCreators";
 import { User } from "../user/contracts/state";
-import { setAuthDataLoadingStatus } from "./actionCreators";
+import {
+  setSignInLoadingStatus,
+  setSignUpLoadingStatus,
+} from "./actionCreators";
 import {
   AuthDataActionType,
   IFetchSignInAction,
@@ -19,20 +22,18 @@ export function* fetchSignInRequest({ payload }: IFetchSignInAction): any {
     }
 
     yield put(setUserData(data));
-    yield put(setAuthDataLoadingStatus(LoadingStatus.LOADED));
+    yield put(setSignInLoadingStatus(LoadingStatus.LOADED));
   } catch (error) {
-    yield put(setAuthDataLoadingStatus(LoadingStatus.ERROR));
+    yield put(setSignInLoadingStatus(LoadingStatus.ERROR));
   }
 }
 
 export function* fetchSignUpRequest({ payload }: IFetchSignUpAction): any {
   try {
     yield call(AuthApi.signUp, payload);
-    // const data: User = yield call(AuthApi.signUp, payload);
-    // yield put(setUserData(data)); не устанавливать пользователя после регистрации - оставить на странице регистрации и уведомление - проверьте почту
-    yield put(setAuthDataLoadingStatus(LoadingStatus.LOADED));
+    yield put(setSignUpLoadingStatus(LoadingStatus.LOADED));
   } catch (error) {
-    yield put(setAuthDataLoadingStatus(LoadingStatus.ERROR));
+    yield put(setSignUpLoadingStatus(LoadingStatus.ERROR));
   }
 }
 

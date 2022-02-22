@@ -11,11 +11,8 @@ import { RegisterModal } from "./components/RegisterModal";
 import { useNotification } from "../../hooks/useNotification";
 import { Notification } from "../../components/Notification";
 import { useSelector } from "react-redux";
-import {
-  selectIsAuthLoading,
-  selectLoadingStatus,
-} from "../../store/ducks/auth/selectors";
 import { LoadingStatus } from "../../store/types";
+import { selectAuthState } from "../../store/ducks/auth/selectors";
 
 enum SignInModalState {
   Login = "signIn",
@@ -26,10 +23,15 @@ export const Authentication: React.FC = (): React.ReactElement => {
   const [visibleModal, setVisibleModal] = useState<
     SignInModalState.Login | SignInModalState.Register | undefined
   >(undefined);
-  const loadingStatus = useSelector(selectLoadingStatus);
-  const isLoagin = useSelector(selectIsAuthLoading);
-  const [text, handleOpenNotification, handleCloseNotification] =
-    useNotification();
+  const { loadingSignInStatus, loadingSignUpStatus } =
+    useSelector(selectAuthState);
+  const [
+    openNotification,
+    notificationText,
+    notificationSeverity,
+    handleOpenNotification,
+    handleCloseNotification,
+  ] = useNotification();
 
   const handleClickOpenSignIn = (): void => {
     setVisibleModal(SignInModalState.Login);
@@ -44,24 +46,46 @@ export const Authentication: React.FC = (): React.ReactElement => {
   }, [setVisibleModal]);
 
   React.useEffect(() => {
-    if (
-      loadingStatus === LoadingStatus.ERROR &&
-      visibleModal === SignInModalState.Login
-    ) {
-      handleOpenNotification("Неверный логин или пароль");
-    } else if (
-      loadingStatus === LoadingStatus.ERROR &&
-      visibleModal === SignInModalState.Register
-    ) {
-      handleOpenNotification("Произошла ошибка при создании учетной записи");
-    } else if (loadingStatus === LoadingStatus.LOADED) {
+    if (loadingSignInStatus === LoadingStatus.ERROR) {
+      handleOpenNotification("error", "Неверный логин или пароль");
+      return;
+    }
+
+    if (loadingSignUpStatus === LoadingStatus.ERROR) {
+      handleOpenNotification(
+        "error",
+        "Произошла ошибка при создании учетной записи"
+      );
+      return;
+    }
+
+    if (loadingSignUpStatus === LoadingStatus.LOADED) {
+      handleOpenNotification(
+        "success",
+        "Учетная запись успешно создана. Проверьте почту"
+      );
+      handleCloseModal();
+      return;
+    }
+
+    if (loadingSignInStatus === LoadingStatus.LOADED) {
       handleCloseModal();
     }
-  }, [loadingStatus, handleCloseModal, handleOpenNotification, visibleModal]);
+  }, [
+    loadingSignInStatus,
+    loadingSignUpStatus,
+    handleOpenNotification,
+    handleCloseModal,
+  ]);
 
   return (
     <>
-      <Notification text={text} handleClose={handleCloseNotification} />
+      <Notification
+        open={openNotification}
+        text={notificationText}
+        severity={notificationSeverity}
+        handleClose={handleCloseNotification}
+      />
       <div className={styles["wrapper"]}>
         <section className={styles["blueSide"]}>
           <TwitterIcon color="primary" className={styles["blueSideBigIcon"]} />
@@ -119,12 +143,12 @@ export const Authentication: React.FC = (): React.ReactElement => {
             <LoginModal
               open={visibleModal === SignInModalState.Login}
               handleClose={handleCloseModal}
-              loading={isLoagin}
+              loading={loadingSignInStatus === LoadingStatus.LOADING}
             />
             <RegisterModal
               open={visibleModal === SignInModalState.Register}
               handleClose={handleCloseModal}
-              loading={isLoagin}
+              loading={loadingSignUpStatus === LoadingStatus.LOADING}
             />
           </div>
         </section>

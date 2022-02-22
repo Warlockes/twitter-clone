@@ -6,7 +6,8 @@ import { LoadingStatus } from "../../../types";
 export enum AuthDataActionType {
   FETCH_SIGN_IN = "auth/FETCH_SIGN_IN",
   FETCH_SIGN_UP = "auth/FETCH_SIGN_UP",
-  SET_LOADING_STATUS = "auth/SET_LOADING_STATUS",
+  SET_SiGN_IN_LOADING_STATUS = "auth/SET_SiGN_IN_LOADING_STATUS",
+  SET_SiGN_UP_LOADING_STATUS = "auth/SET_SiGN_UP_LOADING_STATUS",
 }
 
 export interface IFetchSignInAction extends Action<AuthDataActionType> {
@@ -19,12 +20,18 @@ export interface IFetchSignUpAction extends Action<AuthDataActionType> {
   payload: IRegisterFormState;
 }
 
-export interface ISetAuthLoadingStatus extends Action<AuthDataActionType> {
-  type: AuthDataActionType.SET_LOADING_STATUS;
+export interface ISetSignInLoadingStatus extends Action<AuthDataActionType> {
+  type: AuthDataActionType.SET_SiGN_IN_LOADING_STATUS;
+  payload: LoadingStatus;
+}
+
+export interface ISetSignUpLoadingStatus extends Action<AuthDataActionType> {
+  type: AuthDataActionType.SET_SiGN_UP_LOADING_STATUS;
   payload: LoadingStatus;
 }
 
 export type AuthDataActions =
-  | ISetAuthLoadingStatus
+  | ISetSignInLoadingStatus
+  | ISetSignUpLoadingStatus
   | IFetchSignInAction
   | IFetchSignUpAction;

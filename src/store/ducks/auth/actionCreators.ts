@@ -5,7 +5,8 @@ import {
   AuthDataActionType,
   IFetchSignInAction,
   IFetchSignUpAction,
-  ISetAuthLoadingStatus,
+  ISetSignInLoadingStatus,
+  ISetSignUpLoadingStatus,
 } from "./contracts/actionTypes";
 
 export const fetchSignIn = (payload: ILoginFormState): IFetchSignInAction => ({
@@ -20,9 +21,16 @@ export const fetchSignUp = (
   payload,
 });
 
-export const setAuthDataLoadingStatus = (
+export const setSignInLoadingStatus = (
   payload: LoadingStatus
-): ISetAuthLoadingStatus => ({
-  type: AuthDataActionType.SET_LOADING_STATUS,
+): ISetSignInLoadingStatus => ({
+  type: AuthDataActionType.SET_SiGN_IN_LOADING_STATUS,
+  payload,
+});
+
+export const setSignUpLoadingStatus = (
+  payload: LoadingStatus
+): ISetSignUpLoadingStatus => ({
+  type: AuthDataActionType.SET_SiGN_UP_LOADING_STATUS,
   payload,
 });

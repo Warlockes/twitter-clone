@@ -1,9 +1,12 @@
 import { SnackbarCloseReason } from "@material-ui/core/Snackbar";
+import { Color } from "@material-ui/lab/Alert";
 import React from "react";
 
 type UseNotification = () => [
+  open: boolean,
   text: string | null,
-  handleOpenNotification: (notificationText: string) => void,
+  severity: Color,
+  handleOpenNotification: (severity: Color, notificationText: string) => void,
   handleCloseNotification: (
     event?: React.SyntheticEvent<any>,
     reason?: SnackbarCloseReason
@@ -11,13 +14,17 @@ type UseNotification = () => [
 ];
 
 export const useNotification: UseNotification = () => {
-  const [label, setText] = React.useState<string | null>(null);
+  const [open, setOpen] = React.useState<boolean>(false);
+  const [text, setText] = React.useState<string | null>(null);
+  const [severity, setSeverity] = React.useState<Color>("error");
 
   const handleOpenNotification = React.useCallback(
-    (notificationText: string) => {
+    (severity: Color, notificationText: string) => {
+      setSeverity(severity);
       setText(notificationText);
+      setOpen(true);
     },
-    [setText]
+    [setText, setSeverity, setOpen]
   );
 
   const handleCloseNotification: (
@@ -29,10 +36,16 @@ export const useNotification: UseNotification = () => {
         return;
       }
 
-      setText(null);
+      setOpen(false);
     },
-    [setText]
+    [setOpen]
   );
 
-  return [label, handleOpenNotification, handleCloseNotification];
+  return [
+    open,
+    text,
+    severity,
+    handleOpenNotification,
+    handleCloseNotification,
+  ];
 };

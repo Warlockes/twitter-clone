@@ -3,28 +3,35 @@ import { LoadingStatus } from "../../types";
 import { AuthDataActions, AuthDataActionType } from "./contracts/actionTypes";
 import { AuthState } from "./contracts/state";
 
-const initialUserState: AuthState = {
-  loadingStatus: LoadingStatus.NEVER,
+const initialAuthState: AuthState = {
+  loadingSignInStatus: LoadingStatus.NEVER,
+  loadingSignUpStatus: LoadingStatus.NEVER,
 };
 
 export const authReducer = produce(
   (draft: Draft<AuthState>, action: AuthDataActions) => {
     switch (action.type) {
       case AuthDataActionType.FETCH_SIGN_IN:
-        draft.loadingStatus = LoadingStatus.LOADING;
+        draft.loadingSignUpStatus = LoadingStatus.NEVER;
+        draft.loadingSignInStatus = LoadingStatus.LOADING;
         break;
 
       case AuthDataActionType.FETCH_SIGN_UP:
-        draft.loadingStatus = LoadingStatus.LOADING;
+        draft.loadingSignInStatus = LoadingStatus.NEVER;
+        draft.loadingSignUpStatus = LoadingStatus.LOADING;
         break;
 
-      case AuthDataActionType.SET_LOADING_STATUS:
-        draft.loadingStatus = action.payload;
+      case AuthDataActionType.SET_SiGN_IN_LOADING_STATUS:
+        draft.loadingSignInStatus = action.payload;
+        break;
+
+      case AuthDataActionType.SET_SiGN_UP_LOADING_STATUS:
+        draft.loadingSignUpStatus = action.payload;
         break;
 
       default:
         break;
     }
   },
-  initialUserState
+  initialAuthState
 );

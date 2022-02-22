@@ -4,11 +4,8 @@ import { AuthState } from "./contracts/state";
 
 export const selectAuthState = (state: RootState): AuthState => state.auth;
 
-export const selectLoadingStatus = (state: RootState): LoadingStatus =>
-  selectAuthState(state).loadingStatus;
+export const selectSignInLoadingStatus = (state: RootState): LoadingStatus =>
+  selectAuthState(state).loadingSignInStatus;
 
-export const selectIsAuthLoading = (state: RootState): boolean =>
-  selectLoadingStatus(state) === LoadingStatus.LOADING;
-
-export const selectIsAuthLoaded = (state: RootState): boolean =>
-  selectLoadingStatus(state) === LoadingStatus.LOADED;
+export const selectSignUpLoadingStatus = (state: RootState): LoadingStatus =>
+  selectAuthState(state).loadingSignUpStatus;
