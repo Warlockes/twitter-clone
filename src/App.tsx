@@ -40,7 +40,7 @@ function App() {
     }
   }, [isUserLoaded, history, isReady]);
 
-  if (isReady) {
+  if (!isReady) {
     return (
       <div className={styles["loader-container"]}>
         <TwitterIcon color="primary" />

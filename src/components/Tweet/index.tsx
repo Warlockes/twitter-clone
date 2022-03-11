@@ -40,32 +40,28 @@ export const Tweet: React.FC<TweetProps> = ({
   const open = Boolean(anchorEl);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    event.stopPropagation();
+    event.preventDefault();
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClickDeleteTweet = (): void => {
+  const handleClickDeleteTweet = (
+    event: React.MouseEvent<HTMLElement>
+  ): void => {
     if (window.confirm("Действительно хотите удалить твит?")) {
       alert("Твит снесен под корень!");
     }
+
+    handleClose(event);
+  };
+
+  const handleClose = (event: React.MouseEvent<HTMLElement>) => {
+    event.stopPropagation();
+    event.preventDefault();
     setAnchorEl(null);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const handleClickTweet = (event: React.MouseEvent<HTMLElement>): void => {
-    const { target } = event;
-
-    if (target instanceof Element) {
-      if (
-        target.closest("#actions-button") ||
-        target.attributes.getNamedItem("aria-hidden") ||
-        target.attributes.getNamedItem("aria-disabled")
-      ) {
-        return;
-      }
-    }
+  const handleClickTweet = (): void => {
     push(`/home/tweet/${_id}`);
   };
 
