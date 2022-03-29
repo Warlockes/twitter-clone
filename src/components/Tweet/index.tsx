@@ -1,6 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import CommentIcon from "@material-ui/icons/ChatBubbleOutlineOutlined";
 import RepostIcon from "@material-ui/icons/RepeatOutlined";
 import LikeIcon from "@material-ui/icons/FavoriteBorderOutlined";
@@ -17,11 +18,14 @@ import {
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 
 import { formatDate } from "../../utils/formatDate";
+import { ImageList } from "../ImageList";
+import { removeTweet } from "../../store/ducks/tweets/actionCreators";
 import styles from "./Tweet.module.scss";
 
 interface TweetProps {
   _id: string;
   text: string;
+  images?: string[];
   createdAt: string;
   user: {
     fullname: string;
@@ -32,9 +36,11 @@ interface TweetProps {
 export const Tweet: React.FC<TweetProps> = ({
   _id,
   text,
+  images,
   createdAt,
   user,
 }: TweetProps): React.ReactElement => {
+  const dispatch = useDispatch();
   const { push } = useHistory();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -49,7 +55,7 @@ export const Tweet: React.FC<TweetProps> = ({
     event: React.MouseEvent<HTMLElement>
   ): void => {
     if (window.confirm("Действительно хотите удалить твит?")) {
-      alert("Твит снесен под корень!");
+      dispatch(removeTweet(_id));
     }
 
     handleClose(event);
@@ -97,6 +103,7 @@ export const Tweet: React.FC<TweetProps> = ({
           >
             {text}
           </Typography>
+          {images && <ImageList images={images} />}
           <div className={styles["tweetFooter"]}>
             <div>
               <IconButton>

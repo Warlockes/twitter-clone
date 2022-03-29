@@ -1,0 +1,33 @@
+.imageList {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.imageListItem {
+  width: 60px;
+  height: 60px;
+  border-radius: 6px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  overflow: hidden;
+
+  & img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.removeBtn {
+  position: relative;
+  top: -8px;
+  right: -48px;
+  padding: 2px !important;
+  background-color: #ff4d4d !important;
+
+  & svg path {
+    fill: white;
+  }
+}

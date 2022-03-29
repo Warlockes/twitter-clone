@@ -7,20 +7,30 @@ import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import IconButton from "@material-ui/core/IconButton";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
-import ImageOutlinedIcon from "@material-ui/icons/ImageOutlined";
 import EmojiIcon from "@material-ui/icons/SentimentSatisfiedOutlined";
 import Alert from "@material-ui/lab/Alert";
 import { Collapse } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 
-import { fetchAddTweet } from "../../store/ducks/tweets/actionCreators";
+import {
+  fetchAddTweet,
+  setAddFormState,
+} from "../../store/ducks/tweets/actionCreators";
 import { selectAddFormState } from "../../store/ducks/tweets/selectors";
 import { AddFormState } from "../../store/ducks/tweets/contracts/state";
-import styles from "./AddTweetForm.module.scss";
 import { selectUserData } from "../../store/ducks/user/selectors";
+import { UploadImagesButton } from "../UploadImagesButton";
+import { uploadImage } from "../../utils/uploadImage";
+import { ImageList } from "../ImageList";
+import styles from "./AddTweetForm.module.scss";
 
 interface AddTweetFormProps {
   maxRows?: number;
+}
+
+interface ImageObj {
+  blobUrl: string;
+  file: File;
 }
 
 const MAX_LENGTH = 280;
@@ -31,11 +41,12 @@ const MAX_LENGTH = 280;
 export const AddTweetForm: React.FC<AddTweetFormProps> = ({
   maxRows,
 }: AddTweetFormProps): React.ReactElement => {
+  const [text, setText] = React.useState<string>("");
+  const [visibleError, setVisibleError] = React.useState<boolean>(false);
+  const [images, setImages] = React.useState<ImageObj[]>([]);
   const dispatch = useDispatch();
   const user = useSelector(selectUserData);
   const addFormState = useSelector(selectAddFormState);
-  const [text, setText] = React.useState<string>("");
-  const [visibleError, setVisibleError] = React.useState<boolean>(false);
   const textLimitPercent = Math.round((text.length / 280) * 100);
   const textCount = MAX_LENGTH - text.length;
 
@@ -53,9 +64,33 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
     }
   };
 
-  const handleClickAddTweet = (): void => {
-    dispatch(fetchAddTweet(text));
+  const handleClickAddTweet = async (): Promise<void> => {
+    const result = [];
+    dispatch(setAddFormState(AddFormState.LOADING));
+
+    for (let i = 0; i < images.length; i++) {
+      const file = images[i].file;
+      const { url } = await uploadImage(file);
+      result.push(url);
+    }
+
+    dispatch(fetchAddTweet({ text, images: result }));
     setText("");
+    setImages([]);
+  };
+
+  const handleAddImage = React.useCallback((blobUrl: string, file: File) => {
+    setImages((prev) => [
+      ...prev,
+      {
+        blobUrl,
+        file,
+      },
+    ]);
+  }, []);
+
+  const handleRemoveImage = (blobUrl: string) => {
+    setImages((prev) => prev.filter((obj) => obj.blobUrl !== blobUrl));
   };
 
   return (
@@ -81,9 +116,7 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
             styles["addFormBottomActions"]
           )}
         >
-          <IconButton color="primary">
-            <ImageOutlinedIcon style={{ fontSize: 26 }} />
-          </IconButton>
+          <UploadImagesButton onAdd={handleAddImage} />
           <IconButton color="primary">
             <EmojiIcon style={{ fontSize: 26 }} />
           </IconButton>
@@ -133,6 +166,10 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
           </Button>
         </div>
       </div>
+      <ImageList
+        images={images.map((image) => image.blobUrl)}
+        onRemove={handleRemoveImage}
+      />
       <Collapse in={visibleError}>
         <Alert
           severity="error"

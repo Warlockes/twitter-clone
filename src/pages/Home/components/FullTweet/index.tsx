@@ -13,6 +13,7 @@ import {
 import { useParams } from "react-router-dom";
 import format from "date-fns/format";
 import ruLang from "date-fns/locale/ru";
+import mediumZoom from "medium-zoom";
 
 import CommentIcon from "@material-ui/icons/ChatBubbleOutlineOutlined";
 import RepostIcon from "@material-ui/icons/RepeatOutlined";
@@ -28,6 +29,7 @@ import {
   selectTweetData,
 } from "../../../../store/ducks/tweet/selectors";
 import styles from "./FullTweet.module.scss";
+import { ImageList } from "../../../../components/ImageList";
 
 export const FullTweet: React.FC = (): React.ReactElement | null => {
   const dispatch = useDispatch();
@@ -45,6 +47,12 @@ export const FullTweet: React.FC = (): React.ReactElement | null => {
     };
   }, [dispatch, id]);
 
+  React.useEffect(() => {
+    if (!isLoadingData) {
+      mediumZoom("[data-zoomable]");
+    }
+  }, [isLoadingData]);
+
   if (isLoadingData) {
     return (
       <div className={styles["tweetLoader"]}>
@@ -54,7 +62,7 @@ export const FullTweet: React.FC = (): React.ReactElement | null => {
   }
 
   if (tweetData) {
-    const { text, user, createdAt } = tweetData;
+    const { text, user, createdAt, images } = tweetData;
     const { fullname, username } = user;
 
     return (
@@ -70,6 +78,7 @@ export const FullTweet: React.FC = (): React.ReactElement | null => {
           <Typography className={styles["tweetText"]} variant="h5">
             {text}
           </Typography>
+          {images && <ImageList images={images} />}
           <Typography>
             <span className={styles["tweetDate"]}>
               {format(new Date(createdAt), "H:mm")} ·{" "}

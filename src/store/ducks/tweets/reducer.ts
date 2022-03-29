@@ -39,6 +39,12 @@ export const tweetsReducer = produce(
         draft.addFormState = AddFormState.LOADING;
         break;
 
+      case TweetsActionType.REMOVE_TWEET:
+        draft.items = draft.items.filter(
+          (tweet) => tweet._id !== action.payload
+        );
+        break;
+
       default:
         break;
     }

@@ -106,18 +106,20 @@ export const SideMenu: React.FC = (): React.ReactElement => {
         </div>
       </li>
       <li className={styles["sideMenuListItem"]}>
-        <div>
-          <UserIcon className={styles["sideMenuListItemIcon"]} />
+        <Link to="/user" className={styles["link"]}>
+          <div>
+            <UserIcon className={styles["sideMenuListItemIcon"]} />
 
-          <Hidden smDown>
-            <Typography
-              className={styles["sideMenuListItemLabel"]}
-              variant="h6"
-            >
-              Профиль
-            </Typography>
-          </Hidden>
-        </div>
+            <Hidden smDown>
+              <Typography
+                className={styles["sideMenuListItemLabel"]}
+                variant="h6"
+              >
+                Профиль
+              </Typography>
+            </Hidden>
+          </div>
+        </Link>
       </li>
       <li className={styles["sideMenuListItem"]}>
         <Button

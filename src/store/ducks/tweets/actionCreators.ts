@@ -7,6 +7,7 @@ import {
   IAddTweetsAction,
   IFetchAddTweetAction,
   ISetAddFormState,
+  IRemoveTweetAction,
 } from "./contracts/actionTypes";
 import { AddFormState, Tweet, TweetsState } from "./contracts/state";
 
@@ -20,8 +21,16 @@ export const addTweet = (payload: Tweet): IAddTweetsAction => ({
   payload,
 });
 
-export const fetchAddTweet = (payload: string): IFetchAddTweetAction => ({
+export const fetchAddTweet = (payload: {
+  text: string;
+  images: string[];
+}): IFetchAddTweetAction => ({
   type: TweetsActionType.FETCH_ADD_TWEET,
+  payload,
+});
+
+export const removeTweet = (payload: string): IRemoveTweetAction => ({
+  type: TweetsActionType.REMOVE_TWEET,
   payload,
 });
 

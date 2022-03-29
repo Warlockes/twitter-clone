@@ -24,6 +24,8 @@ export const Home = (): React.ReactElement => {
     dispatch(fetchTweets());
   }, [dispatch]);
 
+  console.log("Tweets", tweets);
+
   return (
     <Paper className={styles["tweetsWrapper"]} variant="outlined">
       <Paper className={styles["tweetsHeader"]} variant="outlined">
