@@ -7,7 +7,7 @@ import { Layout } from "./pages/Layout";
 import { Authentication } from "./pages/Authentication";
 import { UserPage } from "./pages/User";
 import {
-  selectIsUserLoaded,
+  selectIsAuth,
   selectLoadingStatus,
 } from "./store/ducks/user/selectors";
 import { fetchUserData } from "./store/ducks/user/actionCreators";
@@ -17,12 +17,11 @@ import styles from "./App.module.scss";
 
 function App() {
   // TODO:
-  // 2) Чекать, если юзер не авторизован, то очищать токен и редакс
   // 3) При удалении пользователя удалять все его твиты
 
   const dispatch = useDispatch();
-  const history = useHistory();
-  const isUserLoaded = useSelector(selectIsUserLoaded);
+  const { replace } = useHistory();
+  const isAuth = useSelector(selectIsAuth);
   const loadingStatus = useSelector(selectLoadingStatus);
   const isReady =
     loadingStatus !== LoadingStatus.NEVER &&
@@ -33,28 +32,28 @@ function App() {
   }, [dispatch]);
 
   React.useEffect(() => {
-    if (isReady && !isUserLoaded) {
-      history.replace("/auth");
+    if (isReady && !isAuth) {
+      replace("/auth");
     } else {
-      history.replace("/home");
+      replace("/home");
     }
-  }, [isUserLoaded, history, isReady]);
+  }, [isAuth, isReady, replace]);
 
   if (!isReady) {
     return (
-      <div className={styles["loader-container"]}>
+      <div className={styles.loaderContainer}>
         <TwitterIcon color="primary" />
       </div>
     );
   }
 
   return (
-    <div className={styles["twitter-clone"]}>
+    <div className={styles.twitterClone}>
       <Switch>
         <Route path="/auth" component={Authentication} exact />
         <Layout>
           <Route path="/home" component={Home} />
-          <Route path="/user" component={UserPage} />
+          <Route path="/user/:id" component={UserPage} />
         </Layout>
       </Switch>
     </div>

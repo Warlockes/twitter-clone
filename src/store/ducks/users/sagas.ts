@@ -7,7 +7,7 @@ import { UsersApi } from "../../../services/api/usersApi";
 
 export function* fetchUsersRequest(): any {
   try {
-    const items = yield call(UsersApi.fetctUsers);
+    const items = yield call(UsersApi.fetchUsers);
     yield put(setUsers(items));
   } catch (error) {
     yield put(setUsersLoadingStatus(LoadingStatus.ERROR));

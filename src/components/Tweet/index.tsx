@@ -74,37 +74,33 @@ export const Tweet: React.FC<TweetProps> = ({
   return (
     <Box
       component="div"
-      className={styles["tweetWrapper"]}
+      className={styles.tweetWrapper}
       onClick={handleClickTweet}
     >
       <Paper
-        className={classNames(styles["tweet"], styles["tweetsHeader"])}
+        className={classNames(styles.tweet, styles.tweetsHeader)}
         variant="outlined"
       >
         <Avatar
-          className={styles["tweetAvatar"]}
+          className={styles.tweetAvatar}
           alt={user.fullname}
           src="Ссылка на аватар"
         />
-        <Box component="div" className={styles["tweeetBody"]}>
+        <Box component="div" className={styles.tweeetBody}>
           <Typography>
             <strong>{user.fullname}</strong>&nbsp;
-            <span className={styles["tweetUserName"]}>@{user.username}</span>
+            <span className={styles.tweetUserName}>@{user.username}</span>
             &nbsp;
-            <span className={styles["tweetUserName"]}>·</span>&nbsp;
-            <span className={styles["tweetUserName"]}>
+            <span className={styles.tweetUserName}>·</span>&nbsp;
+            <span className={styles.tweetUserName}>
               {formatDate(new Date(createdAt))}
             </span>
           </Typography>
-          <Typography
-            className={styles["tweetText"]}
-            variant="body1"
-            gutterBottom
-          >
+          <Typography className={styles.tweetText} variant="body1" gutterBottom>
             {text}
           </Typography>
           {images && <ImageList images={images} />}
-          <div className={styles["tweetFooter"]}>
+          <div className={styles.tweetFooter}>
             <div>
               <IconButton>
                 <CommentIcon style={{ fontSize: 20 }} />
@@ -128,11 +124,7 @@ export const Tweet: React.FC<TweetProps> = ({
             </div>
           </div>
         </Box>
-        <Box
-          component="div"
-          id="actions-button"
-          className={styles["tweetMenu"]}
-        >
+        <Box component="div" id="actions-button" className={styles.tweetMenu}>
           <IconButton
             aria-label="more"
             id="menu-button"
@@ -144,6 +136,9 @@ export const Tweet: React.FC<TweetProps> = ({
             <MoreHorizIcon />
           </IconButton>
           <Menu
+            classes={{
+              paper: styles.menu,
+            }}
             id="action-menu"
             MenuListProps={{
               "aria-labelledby": "menu-button",
@@ -155,7 +150,7 @@ export const Tweet: React.FC<TweetProps> = ({
             <MenuItem onClick={handleClose}>Редактировать</MenuItem>
             <MenuItem
               onClick={handleClickDeleteTweet}
-              className={styles["menu-delete-button"]}
+              className={styles.menuDeleteButton}
             >
               Удалить твит
             </MenuItem>

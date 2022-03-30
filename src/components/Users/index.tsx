@@ -28,19 +28,20 @@ export const Users = () => {
   React.useEffect(() => {
     dispatch(fetchUsers());
   }, [dispatch]);
+
   return (
-    <Paper className={styles["rightSideBlock"]}>
-      <Paper className={styles["rightSideBlockHeader"]} variant="outlined">
+    <Paper className={styles.rightSideBlock}>
+      <Paper className={styles.rightSideBlockHeader} variant="outlined">
         <Typography component="b">Кого читать</Typography>
       </Paper>
       {isLoadingUsers ? (
-        <div className={styles["rightSideTagsLoader"]}>
+        <div className={styles.rightSideTagsLoader}>
           <CircularProgress />
         </div>
       ) : (
         <List>
           {users.map(({ _id, username, fullname }) => (
-            <ListItem key={_id} className={styles["rightSideBlockItem"]}>
+            <ListItem key={_id} className={styles.rightSideBlockItem}>
               <ListItemAvatar>
                 <Avatar alt={fullname} src="Ссылка на аватар" />
               </ListItemAvatar>

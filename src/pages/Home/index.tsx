@@ -24,11 +24,9 @@ export const Home = (): React.ReactElement => {
     dispatch(fetchTweets());
   }, [dispatch]);
 
-  console.log("Tweets", tweets);
-
   return (
-    <Paper className={styles["tweetsWrapper"]} variant="outlined">
-      <Paper className={styles["tweetsHeader"]} variant="outlined">
+    <Paper className={styles.tweetsWrapper} variant="outlined">
+      <Paper className={styles.tweetsHeader} variant="outlined">
         <Route path="/home/:any">
           <BackButton />
         </Route>
@@ -43,16 +41,16 @@ export const Home = (): React.ReactElement => {
       </Paper>
       <Route path={["/home", "/home/search"]} exact>
         <Paper>
-          <div className={styles["addForm"]}>
+          <div className={styles.addForm}>
             <AddTweetForm />
           </div>
-          <div className={styles["addFormBottomLine"]} />
+          <div className={styles.addFormBottomLine} />
         </Paper>
       </Route>
 
       <Route path="/home" exact>
         {isLoadingTweets ? (
-          <div className={styles["tweetsLoader"]}>
+          <div className={styles.tweetsLoader}>
             <CircularProgress />
           </div>
         ) : (

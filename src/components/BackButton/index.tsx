@@ -5,7 +5,7 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { useHistory } from "react-router";
 import styles from "./BackButton.module.scss";
 
-export const BackButton: React.FC = (): React.ReactElement => {
+export const BackButton: React.FC = () => {
   const history = useHistory();
 
   const handleClickButton = (): void => {
@@ -15,7 +15,7 @@ export const BackButton: React.FC = (): React.ReactElement => {
   return (
     <IconButton
       onClick={handleClickButton}
-      className={styles["tweetsHeaderBackButton"]}
+      className={styles.tweetsHeaderBackButton}
       color="primary"
     >
       <ArrowBackIcon />

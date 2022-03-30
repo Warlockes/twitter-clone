@@ -86,37 +86,37 @@ export const Authentication: React.FC = (): React.ReactElement => {
         severity={notificationSeverity}
         handleClose={handleCloseNotification}
       />
-      <div className={styles["wrapper"]}>
-        <section className={styles["blueSide"]}>
-          <TwitterIcon color="primary" className={styles["blueSideBigIcon"]} />
-          <ul className={styles["blueSideListInfo"]}>
-            <li className={styles["blueSideListInfoItem"]}>
+      <div className={styles.wrapper}>
+        <section className={styles.blueSide}>
+          <TwitterIcon color="primary" className={styles.blueSideBigIcon} />
+          <ul className={styles.blueSideListInfo}>
+            <li className={styles.blueSideListInfoItem}>
               <Typography variant="h6">
-                <SearchIcon className={styles["blueSideListInfoIcon"]} />
+                <SearchIcon className={styles.blueSideListInfoIcon} />
                 Читайте о том, что вам интересно.
               </Typography>
             </li>
-            <li className={styles["blueSideListInfoItem"]}>
+            <li className={styles.blueSideListInfoItem}>
               <Typography variant="h6">
-                <PeopleIcon className={styles["blueSideListInfoIcon"]} />
+                <PeopleIcon className={styles.blueSideListInfoIcon} />
                 Узнайте, о чем говорят в мире.
               </Typography>
             </li>
-            <li className={styles["blueSideListInfoItem"]}>
+            <li className={styles.blueSideListInfoItem}>
               <Typography variant="h6">
-                <MessageIcon className={styles["blueSideListInfoIcon"]} />
+                <MessageIcon className={styles.blueSideListInfoIcon} />
                 Присоединяйтесь к общению.
               </Typography>
             </li>
           </ul>
         </section>
-        <section className={styles["loginSide"]}>
-          <div className={styles["loginSideWrapper"]}>
+        <section className={styles.loginSide}>
+          <div className={styles.loginSideWrapper}>
             <TwitterIcon
               color="primary"
-              className={styles["loginSideTwitterIcon"]}
+              className={styles.loginSideTwitterIcon}
             />
-            <Typography className={styles["loginSideTitle"]} variant="h4">
+            <Typography className={styles.loginSideTitle} variant="h4">
               Узнайте, что происходит в мире прямо сейчас
             </Typography>
             <Typography>

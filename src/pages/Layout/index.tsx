@@ -12,7 +12,7 @@ export const Layout: React.FC<LayoutProps> = ({
   children,
 }): React.ReactElement => {
   return (
-    <Container className={styles["wrapper"]} maxWidth="lg">
+    <Container className={styles.wrapper} maxWidth="lg">
       <Grid container spacing={3}>
         <Grid sm={1} md={3} item>
           <SideMenu />

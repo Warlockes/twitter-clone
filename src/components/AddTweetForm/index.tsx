@@ -26,6 +26,7 @@ import styles from "./AddTweetForm.module.scss";
 
 interface AddTweetFormProps {
   maxRows?: number;
+  onClose?: () => void;
 }
 
 interface ImageObj {
@@ -40,6 +41,7 @@ const MAX_LENGTH = 280;
 
 export const AddTweetForm: React.FC<AddTweetFormProps> = ({
   maxRows,
+  onClose,
 }: AddTweetFormProps): React.ReactElement => {
   const [text, setText] = React.useState<string>("");
   const [visibleError, setVisibleError] = React.useState<boolean>(false);
@@ -77,6 +79,7 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
     dispatch(fetchAddTweet({ text, images: result }));
     setText("");
     setImages([]);
+    onClose?.();
   };
 
   const handleAddImage = React.useCallback((blobUrl: string, file: File) => {
@@ -95,25 +98,25 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
 
   return (
     <>
-      <div className={styles["addFormBody"]}>
+      <div className={styles.addFormBody}>
         <Avatar
-          className={styles["tweetAvatar"]}
+          className={styles.tweetAvatar}
           alt={user?.fullname}
           src={"Ссылка на аватар"}
         />
         <TextareaAutosize
           onChange={handleChangeTextArea}
-          className={styles["addFormTextarea"]}
+          className={styles.addFormTextarea}
           placeholder="Что происходит?"
           value={text}
           maxRows={maxRows}
         />
       </div>
-      <div className={styles["addFormBottom"]}>
+      <div className={styles.addFormBottom}>
         <div
           className={classNames(
-            styles["tweetFooter"],
-            styles["addFormBottomActions"]
+            styles.tweetFooter,
+            styles.addFormBottomActions
           )}
         >
           <UploadImagesButton onAdd={handleAddImage} />
@@ -121,11 +124,11 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({
             <EmojiIcon style={{ fontSize: 26 }} />
           </IconButton>
         </div>
-        <div className={styles["addFormBottomRight"]}>
+        <div className={styles.addFormBottomRight}>
           {text && (
             <>
               <span>{textCount}</span>
-              <div className={styles["addFormCircleProgress"]}>
+              <div className={styles.addFormCircleProgress}>
                 <CircularProgress
                   variant="determinate"
                   size={20}

@@ -6,6 +6,7 @@ export enum UserDataActionType {
   SET_USER_DATA = "user/SET_DATA",
   FETCH_USER_DATA = "user/FETCH_DATA",
   SET_LOADING_STATUS = "user/SET_LOADING_STATUS",
+  SIGN_OUT = "user/SIGN_OUT",
 }
 
 export interface ISetUserDataAction extends Action<UserDataActionType> {
@@ -22,7 +23,11 @@ export interface ISetUserLoadingStatus extends Action<UserDataActionType> {
   payload: LoadingStatus;
 }
 
+export interface ISignOutAction extends Action<UserDataActionType> {
+  type: UserDataActionType.SIGN_OUT;
+}
 export type UserDataActions =
   | ISetUserDataAction
   | ISetUserLoadingStatus
-  | IFetchUserDataAction;
+  | IFetchUserDataAction
+  | ISignOutAction;

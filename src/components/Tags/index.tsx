@@ -28,19 +28,19 @@ export const Tags: React.FC = (): React.ReactElement => {
   }, [dispatch]);
 
   return (
-    <Paper className={styles["rightSideBlock"]}>
-      <Paper className={styles["rightSideBlockHeader"]} variant="outlined">
+    <Paper className={styles.rightSideBlock}>
+      <Paper className={styles.rightSideBlockHeader} variant="outlined">
         <Typography component="b">Актуальные темы</Typography>
       </Paper>
       {isLoadingTags ? (
-        <div className={styles["rightSideTagsLoader"]}>
+        <div className={styles.rightSideTagsLoader}>
           <CircularProgress />
         </div>
       ) : (
         <List>
           {items.map(({ label, count, _id }) => (
             <React.Fragment key={_id}>
-              <ListItem className={styles["rightSideBlockItem"]}>
+              <ListItem className={styles.rightSideBlockItem}>
                 <Link to={`/home/search?q=${label}`}>
                   <ListItemText
                     primary={label}

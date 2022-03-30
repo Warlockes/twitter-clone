@@ -61,14 +61,14 @@ export const LoginModal: React.FC<ILoginModalProps> = ({
   return (
     <ModalBlock visible={open} onClose={handleClose} title="Войти в аккаунт">
       <FormControl
-        className={styles["loginFormControl"]}
+        className={styles.loginFormControl}
         onSubmit={handleSubmit(onSubmit)}
         component="form"
         fullWidth
       >
         <FormGroup aria-label="position" row>
           <TextField
-            className={styles["registerField"]}
+            className={styles.registerField}
             {...register("email")}
             label="E-mail"
             InputLabelProps={{
@@ -81,7 +81,7 @@ export const LoginModal: React.FC<ILoginModalProps> = ({
             autoFocus
           />
           <TextField
-            className={styles["registerField"]}
+            className={styles.registerField}
             {...register("password")}
             label="Пароль"
             InputLabelProps={{

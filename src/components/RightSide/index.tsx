@@ -9,7 +9,7 @@ import styles from "./RightSide.module.scss";
 
 export const RightSide = (): React.ReactElement => {
   return (
-    <Box className={styles["rightSide"]}>
+    <Box className={styles.rightSide}>
       <SearchTextField
         variant="outlined"
         placeholder="Поиск в Твиттере"

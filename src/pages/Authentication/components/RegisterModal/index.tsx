@@ -74,14 +74,14 @@ export const RegisterModal: React.FC<IRegisterModalProps> = ({
       title="Создайте учетную запись"
     >
       <FormControl
-        className={styles["registerFormControl"]}
+        className={styles.registerFormControl}
         onSubmit={handleSubmit(onSubmit)}
         component="form"
         fullWidth
       >
         <FormGroup aria-label="position" row>
           <TextField
-            className={styles["registerField"]}
+            className={styles.registerField}
             {...register("fullname")}
             label="Полное имя"
             InputLabelProps={{
@@ -94,7 +94,7 @@ export const RegisterModal: React.FC<IRegisterModalProps> = ({
             autoFocus
           />
           <TextField
-            className={styles["registerField"]}
+            className={styles.registerField}
             {...register("username")}
             label="Логин"
             InputLabelProps={{
@@ -106,7 +106,7 @@ export const RegisterModal: React.FC<IRegisterModalProps> = ({
             fullWidth
           />
           <TextField
-            className={styles["registerField"]}
+            className={styles.registerField}
             {...register("email")}
             label="E-mail"
             InputLabelProps={{
@@ -118,7 +118,7 @@ export const RegisterModal: React.FC<IRegisterModalProps> = ({
             fullWidth
           />
           <TextField
-            className={styles["registerField"]}
+            className={styles.registerField}
             {...register("password")}
             label="Пароль"
             InputLabelProps={{
@@ -131,7 +131,7 @@ export const RegisterModal: React.FC<IRegisterModalProps> = ({
             fullWidth
           />
           <TextField
-            className={styles["registerField"]}
+            className={styles.registerField}
             {...register("confirmedPassword")}
             label="Повторите пароль"
             InputLabelProps={{

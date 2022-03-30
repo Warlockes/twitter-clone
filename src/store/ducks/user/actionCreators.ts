@@ -3,6 +3,7 @@ import {
   IFetchUserDataAction,
   ISetUserDataAction,
   ISetUserLoadingStatus,
+  ISignOutAction,
   UserDataActionType,
 } from "./contracts/actionTypes";
 import { UserState } from "./contracts/state";
@@ -23,4 +24,8 @@ export const setUserDataLoadingStatus = (
 ): ISetUserLoadingStatus => ({
   type: UserDataActionType.SET_LOADING_STATUS,
   payload,
+});
+
+export const signOut = (): ISignOutAction => ({
+  type: UserDataActionType.SIGN_OUT,
 });

@@ -55,7 +55,7 @@ export const FullTweet: React.FC = (): React.ReactElement | null => {
 
   if (isLoadingData) {
     return (
-      <div className={styles["tweetLoader"]}>
+      <div className={styles.tweetLoader}>
         <CircularProgress />
       </div>
     );
@@ -74,23 +74,23 @@ export const FullTweet: React.FC = (): React.ReactElement | null => {
           title={<b>{fullname}</b>}
           subheader={`@${username}`}
         />
-        <CardContent className={styles["textWrapper"]}>
-          <Typography className={styles["tweetText"]} variant="h5">
+        <CardContent className={styles.textWrapper}>
+          <Typography className={styles.tweetText} variant="h5">
             {text}
           </Typography>
           {images && <ImageList images={images} />}
           <Typography>
-            <span className={styles["tweetDate"]}>
+            <span className={styles.tweetDate}>
               {format(new Date(createdAt), "H:mm")} ·{" "}
             </span>
-            <span className={styles["tweetDate"]}>
+            <span className={styles.tweetDate}>
               {format(new Date(createdAt), "dd MMM yyyy г.", {
                 locale: ruLang,
               })}
             </span>
           </Typography>
         </CardContent>
-        <CardActions className={styles["actionButtonRow"]}>
+        <CardActions className={styles.actionButtonRow}>
           <IconButton aria-label="">
             <CommentIcon />
           </IconButton>

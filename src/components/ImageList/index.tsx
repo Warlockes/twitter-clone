@@ -13,13 +13,13 @@ export const ImageList: React.FC<ImageListProps> = ({ images, onRemove }) => {
   return (
     <>
       {images.length > 0 && (
-        <div className={styles["imageList"]}>
+        <div className={styles.imageList}>
           {images.map((blobUrl) => (
-            <div key={blobUrl} className={styles["imageListItem"]}>
+            <div key={blobUrl} className={styles.imageListItem}>
               <img src={blobUrl} alt="user" data-zoomable />
               {onRemove && (
                 <IconButton
-                  className={styles["removeBtn"]}
+                  className={styles.removeBtn}
                   onClick={() => onRemove(blobUrl)}
                 >
                   <ClearIcon style={{ fontSize: 15 }} />
