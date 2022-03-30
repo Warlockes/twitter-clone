@@ -56,10 +56,14 @@ export const UserPage: React.FC<RouteComponentProps<{ id: string }>> = ({
         <BackButton />
         <div>
           <Typography variant="h6">Профиль</Typography>
-          <Typography variant="caption" display="block" gutterBottom>
-            {tweets.length}{" "}
-            {formatWord(tweets.length, ["твит", "твита", "твитов"])}
-          </Typography>
+          {isLoadingTweets ? (
+            <Skeleton variant="text" width={50} />
+          ) : (
+            <Typography variant="caption" display="block" gutterBottom>
+              {tweets.length}{" "}
+              {formatWord(tweets.length, ["твит", "твита", "твитов"])}
+            </Typography>
+          )}
         </div>
       </Paper>
 

@@ -17,6 +17,8 @@ import styles from "./App.module.scss";
 
 function App() {
   // TODO:
+
+  // 2) сделать страницу верификации на фронтенде (урок 15)
   // 3) При удалении пользователя удалять все его твиты
 
   const dispatch = useDispatch();

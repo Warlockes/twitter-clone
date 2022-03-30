@@ -10,7 +10,7 @@ import {
   IconButton,
   Typography,
 } from "@material-ui/core";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import format from "date-fns/format";
 import ruLang from "date-fns/locale/ru";
 import mediumZoom from "medium-zoom";
@@ -28,8 +28,8 @@ import {
   selectIsTweetLoading,
   selectTweetData,
 } from "../../../../store/ducks/tweet/selectors";
-import styles from "./FullTweet.module.scss";
 import { ImageList } from "../../../../components/ImageList";
+import styles from "./FullTweet.module.scss";
 
 export const FullTweet: React.FC = (): React.ReactElement | null => {
   const dispatch = useDispatch();
@@ -71,7 +71,14 @@ export const FullTweet: React.FC = (): React.ReactElement | null => {
           avatar={
             <Avatar aria-label="recipe" alt={fullname} src="Ссылка на аватар" />
           }
-          title={<b>{fullname}</b>}
+          title={
+            <Link
+              to={`/user/${tweetData.user._id}`}
+              className={styles.profileLink}
+            >
+              <b>{fullname}</b>
+            </Link>
+          }
           subheader={`@${username}`}
         />
         <CardContent className={styles.textWrapper}>
