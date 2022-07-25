@@ -94,7 +94,7 @@
     "workbox-webpack-plugin": "5.1.4",
     "yup": "^0.32.11"
   },
-  "proxy": "http://localhost:8888",
+  "proxy": "https://alex-twitter-clone-backend.herokuapp.com",
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
