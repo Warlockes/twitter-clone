@@ -105,7 +105,7 @@ export const Tweet: React.FC<TweetProps> = ({
               <IconButton>
                 <CommentIcon style={{ fontSize: 20 }} />
               </IconButton>
-              <span>1</span>
+              {/* <span>1</span> */}
             </div>
             <div>
               <IconButton>

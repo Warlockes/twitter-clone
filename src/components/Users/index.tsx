@@ -19,6 +19,7 @@ import {
 import { fetchUsers } from "../../store/ducks/users/actionCreators";
 import PersonAddIcon from "@material-ui/icons/PersonAddOutlined";
 import styles from "./Users.module.scss";
+import { Link } from "react-router-dom";
 
 export const Users = () => {
   const dispatch = useDispatch();
@@ -41,26 +42,28 @@ export const Users = () => {
       ) : (
         <List>
           {users.map(({ _id, username, fullname }) => (
-            <ListItem key={_id} className={styles.rightSideBlockItem}>
-              <ListItemAvatar>
-                <Avatar alt={fullname} src="Ссылка на аватар" />
-              </ListItemAvatar>
-              <ListItemText
-                primary={fullname}
-                secondary={
-                  <Typography
-                    component="span"
-                    variant="body2"
-                    color="textSecondary"
-                  >
-                    @{username}
-                  </Typography>
-                }
-              />
-              <Button color="primary">
-                <PersonAddIcon />
-              </Button>
-            </ListItem>
+            <Link to={`/user/${_id}`}>
+              <ListItem key={_id} className={styles.rightSideBlockItem}>
+                <ListItemAvatar>
+                  <Avatar alt={fullname} src="Ссылка на аватар" />
+                </ListItemAvatar>
+                <ListItemText
+                  primary={fullname}
+                  secondary={
+                    <Typography
+                      component="span"
+                      variant="body2"
+                      color="textSecondary"
+                    >
+                      @{username}
+                    </Typography>
+                  }
+                />
+                <Button color="primary">
+                  <PersonAddIcon />
+                </Button>
+              </ListItem>
+            </Link>
           ))}
           <Divider component="li" />
         </List>
